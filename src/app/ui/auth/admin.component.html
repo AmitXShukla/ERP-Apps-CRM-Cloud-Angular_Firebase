@@ -26,6 +26,8 @@
   </mat-card-content>
 </mat-card>
 
+<!-- add mode -->
+<ng-template #showAddMode></ng-template>
 <!-- edit mode -->
 <ng-template #showEditMode>
   <form #editDataForm="ngForm" (ngSubmit)="updateData(editDataForm.value);" novalidate>
