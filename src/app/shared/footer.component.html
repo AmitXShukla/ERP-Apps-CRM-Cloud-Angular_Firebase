@@ -1,0 +1,25 @@
+<a title="FaceBook" href="{{ configData.fblink }}" target="_blank" rel="noopener" *ngIf="configData.fblink">
+        <mat-icon matTooltip="connect with FaceBook" class="circle-link example-icon-link" svgIcon="facebook"></mat-icon>
+      </a>
+      <a title="GitHub" href="{{ configData.github }}" target="_blank" rel="noopener" *ngIf="configData.github">
+        <mat-icon matTooltip="connect with GitHub" class="circle-link example-icon-link" svgIcon="github"></mat-icon>
+      </a>
+      <a title="LinkedIn" href="{{ configData.linkedin }}" target="_blank" rel="noopener" *ngIf="configData.linkedin">
+        <mat-icon matTooltip="connect with LinkedIn" class="circle-link example-icon-link" svgIcon="linkedin"></mat-icon>
+      </a>
+      <a title="Twitter" href="{{ configData.twitter }}" target="_blank" rel="noopener" *ngIf="configData.twitter">
+        <mat-icon matTooltip="connect with Twitter" class="circle-link example-icon-link" svgIcon="twitter"></mat-icon>
+      </a>
+      <br/>
+        <!-- Footer -->
+        <span class="example-icon">
+            {{ configData.copyright }}
+              <!-- <div class="github-star-badge">
+                  <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                Star
+              </div>
+               -->
+            <a href="{{ configData.website }}" target="_blank" rel="noopener">
+              <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#1976d2"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+            </a>
+          </span>

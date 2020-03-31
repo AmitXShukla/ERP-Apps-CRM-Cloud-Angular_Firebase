@@ -1,0 +1,139 @@
+  <!-- <div class="example-sidenav-content">
+    <mat-drawer-container class="example-container" autosize>
+      <mat-drawer #drawer class="example-sidenav" mode="side">
+        <p>
+          <a routerLink="/aboutus"><img src="assets/images/ERP.png" width="200" height="100"></a>
+        </p>
+        <mat-divider></mat-divider>
+        <div *ngIf="auth.user | async as user;">
+        <p *ngIf="showFiller" class="middle-headline">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                          <button mat-menu-item>
+                            <mat-icon class="circle-link example-icon-link">book</mat-icon>Address Book
+                          </button>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <button mat-menu-item>
+                        Global Address Book
+                      </button>
+                      <button mat-menu-item>
+                          Local Address Book
+                        </button>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <button mat-menu-item>
+                              <mat-icon class="circle-link example-icon-link">code</mat-icon>Marketing
+                            </button>
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <button mat-menu-item>Campaigns</button>
+                      <button mat-menu-item>Leads</button>
+                      <button mat-menu-item>Oppurtunities</button>
+                      <button mat-menu-item>Expenses</button>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                              <button mat-menu-item>
+                                <mat-icon class="circle-link example-icon-link">phone</mat-icon>Calls Register
+                              </button>
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <button mat-menu-item routerLink="/calls">Calls</button>
+                        <button mat-menu-item>eMails</button>
+                        <button mat-menu-item>enquiry</button>
+                        <button mat-menu-item>visits</button>
+                      </mat-expansion-panel>
+                      <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <button mat-menu-item>
+                                  <mat-icon class="circle-link example-icon-link">help</mat-icon>Helpdesk
+                                </button>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <button mat-menu-item>Service tickets</button>
+                          <button mat-menu-item>workorders</button>
+                          <button mat-menu-item>Expenses</button>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                  <button mat-menu-item>
+                                    <mat-icon class="circle-link example-icon-link">star</mat-icon>Customer
+                                  </button>
+                              </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <button mat-menu-item>Invoice/Bills</button>
+                            <button mat-menu-item>Sales Register</button>
+                          </mat-expansion-panel>
+                          <mat-expansion-panel>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <button mat-menu-item>
+                                      <mat-icon class="circle-link example-icon-link">money</mat-icon>Payables
+                                    </button>
+                                </mat-panel-title>
+                              </mat-expansion-panel-header><button mat-menu-item>Vendor</button>
+                              <button mat-menu-item>Voucher</button>
+                              <button mat-menu-item>Pay Vendor</button>
+                              <button mat-menu-item>Expenses</button>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                      <button mat-menu-item>
+                                        <mat-icon class="circle-link example-icon-link">dashboard</mat-icon>Reports
+                                      </button>
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <button mat-menu-item>Report 1</button>
+                                <button mat-menu-item>Report 2</button>
+                                <button mat-menu-item>Report 3</button>
+                                <button mat-menu-item>Report 4</button>
+                              </mat-expansion-panel>
+              </mat-accordion>
+              <button mat-menu-item routerLink="/config">
+                <mat-icon class="circle-link example-icon-link">settings</mat-icon>My Account
+              </button>
+              <button mat-menu-item routerLink="/admin">
+                <mat-icon class="circle-link example-icon-link">group</mat-icon>Admin
+              </button>
+        </p>
+      </div>
+      </mat-drawer>
+      <mat-toolbar color="none">
+        <mat-toolbar-row>
+          <button mat-fab aria-label="Menu" color="primary" (click)="drawer.toggle()">
+            <mat-icon class="example-icon-link circle-link">menu</mat-icon>
+          </button>
+          <mat-icon class="example-icon" (click)="drawer.toggle()">cloud</mat-icon>
+          <span class="example-icon" (click)="drawer.toggle()">CRM Cloud</span>
+          <span class="example-spacer"></span>
+          <mat-icon class="example-icon-link circle-link" routerLink="/settings">settings</mat-icon>
+          <mat-icon class="example-icon-link circle-link" [matMenuTriggerFor]="helpMenu">help</mat-icon>
+          <mat-icon class="example-icon-link circle-link" [matMenuTriggerFor]="langMenu">language</mat-icon>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+    </mat-drawer-container>
+  </div>
+
+  <mat-menu #langMenu="matMenu">
+    <button mat-menu-item mat-elevation-z4>
+      English
+    </button>
+  </mat-menu>
+  <mat-menu #helpMenu="matMenu">
+    <div class="example-icon">
+      Help text here
+    </div>
+  </mat-menu> -->
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>

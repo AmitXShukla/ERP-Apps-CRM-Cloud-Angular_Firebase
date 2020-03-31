@@ -1,0 +1,139 @@
+<app-header pageTitle="Admin" imageUrl="group" helpType="login"></app-header>
+<mat-card [@fallIn]='state'>
+  <mat-card-content>
+    <div
+      *ngIf="(toggleField=='searchMode') else (toggleField=='addMode')? showAddMode : ((toggleField=='editMode')? showEditMode : showResMode)">
+      <!-- searchmode -->
+      <form #searchFormData="ngForm" class="example-form">
+        <mat-card-actions align="start">
+          <button type="button" (click)="toggle('resMode');getData(searchFormData.value);" mat-raised-button
+            [disabled]="(name.value == '' && email.value == '')" color="primary">Search</button>
+          <span class="med-spacer"></span>
+          <span class="small-spacer"></span>
+          <span matTooltip="Show Recent Results">
+            <mat-icon color="primary" (click)="toggle('resMode');getData();" svgIcon="cached"></mat-icon>
+          </span>
+        </mat-card-actions>
+        <mat-form-field class="example-form">
+          <input matInput type="text" placeholder="Name" id="name" name="name" #name="ngModel" ngModel [disabled]="email.value !== ''">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-form">
+          <input matInput type="text" placeholder="email" id="email" name="email" #email="ngModel" ngModel [disabled]="name.value !== ''">
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- edit mode -->
+<ng-template #showEditMode>
+  <form #editDataForm="ngForm" (ngSubmit)="updateData(editDataForm.value);" novalidate>
+    <input type="hidden" name="author" id="author" [ngModel]="(data$ | async)?.author" required>
+    <mat-error *ngIf="savedChanges">
+      Data is saved.
+      <label class="small-spacer"></label>
+      <mat-icon (click)="this.editDataForm.reset();savedChanges=false;toggle('searchMode');" svgIcon="clear"></mat-icon>
+    </mat-error>
+    <div *ngIf="!savedChanges">
+      <mat-progress-bar mode="indeterminate" *ngIf="dataLoading"></mat-progress-bar>
+      <mat-error *ngIf="error">Error: {{ errorMessage }}</mat-error>
+      <mat-card-actions align="start">
+        <button type="submit" mat-raised-button [disabled]="!this.editDataForm.valid || this.editDataForm.pristine"
+          color="primary">Update</button>
+        <span class="med-spacer"></span>
+        <span matTooltip="Search">
+          <mat-icon color="primary" (click)="toggle('searchMode')" svgIcon="search"></mat-icon>
+        </span>
+        <span class="small-spacer"></span>
+        <span matTooltip="Shwo Recent Results">
+          <mat-icon color="primary" (click)="toggle('resMode');getData();" svgIcon="cached"></mat-icon>
+        </span>
+      </mat-card-actions>
+      <mat-form-field>
+        <input matInput placeholder="Name" name="name" id="name" [ngModel]="(data$ | async)?.name" required
+          minlength="1">
+        <mat-hint align="end">eg Amit Shukla</mat-hint>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="email ID" name="email" id="email" [ngModel]="(data$ | async)?.email" required
+          minlength="1">
+        <mat-hint align="end">eg amit@elishconsulting.com</mat-hint>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="Phone" name="phone" id="phone" [ngModel]="(data$ | async)?.phone" required
+        maxlength="10" pattern="^[a-z0-9_-]{8,15}$">
+        <mat-hint align="end">eg 0123456789</mat-hint>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="role" name="role" id="role" [ngModel]="(data$ | async)?.role" required
+          minlength="1">
+        <mat-hint align="end">eg employee</mat-hint>
+      </mat-form-field>
+    </div>
+  </form>
+</ng-template>
+<!-- Results mode -->
+<ng-template #showResMode>
+  <mat-card-actions align="start">
+    <span class="med-spacer"></span>
+    <span class="med-spacer"></span>
+    <span class="med-spacer"></span>
+    <span matTooltip="Add New">
+      <mat-icon color="primary" (click)="toggle('addMode')" svgIcon="add"></mat-icon>
+    </span>
+    <span class="small-spacer"></span>
+    <span matTooltip="Search All">
+      <mat-icon color="primary" (click)="toggle('searchMode')" svgIcon="search"></mat-icon>
+    </span>
+  </mat-card-actions>
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Recent Results">
+    </mat-form-field>
+  </div>
+  <div class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>eMail</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>phone</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.phone}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>role</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.role}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <mat-header-cell *matHeaderCellDef> action </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span matTooltip="Edit">
+            <button mat-icon-button (click)="getDoc(row.author)">
+              <mat-icon color="primary">edit</mat-icon>
+            </button>
+          </span>
+          <span matTooltip="Delete">
+            <button mat-icon-button (click)="deleteDoc(row.author)">
+              <mat-icon color="primary">delete</mat-icon>
+            </button>
+          </span>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</ng-template>

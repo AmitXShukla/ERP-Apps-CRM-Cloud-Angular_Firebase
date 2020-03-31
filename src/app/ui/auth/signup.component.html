@@ -1,0 +1,61 @@
+<app-simpleheader imageUrl="fiber_new" pageTitle="Sign up" helpType="login"></app-simpleheader>
+<mat-card class="example-card" [@fallIn]='state'>
+  <mat-card-content>
+    <mat-card class="example-card-fixed">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title class="example-icon">Create new account</mat-card-title>
+        <mat-card-subtitle>ElishConsulting.com</mat-card-subtitle>
+        <mat-card-subtitle>
+            <button mat-raised-button color="primary" [routerLink]="['/login']">
+                <mat-icon>close</mat-icon>
+            </button>
+          </mat-card-subtitle>
+      </mat-card-header>
+      <mat-progress-bar mode="indeterminate" *ngIf="dataLoading"></mat-progress-bar>
+      <mat-error *ngIf="IBData.error">Sign up failed. {{ IBData.statusMessage }}</mat-error>
+      <mat-card-content *ngIf="this.IBData.statusCode == 1; else showLogin">
+        <br>
+        <br>
+        <br>
+        <br>
+        <mat-error>
+          A New userId is created. Plese use your emailid and password to login back in future. or If you used Social authentication,
+          you may already have signed in. Please browse to login page now.
+        </mat-error>
+        <br>
+        <br>
+        <br>
+        <br>
+        <mat-card-actions align="start">
+          <button type="button" (click)="IBData.statusCode=0;routeLoginPage();" mat-raised-button
+            color="primary">Close</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #showLogin>
+  <mat-divider></mat-divider>
+  <form #formData="ngForm" (ngSubmit)="onSubmit(formData.value)" class="example-form">
+    <mat-card-actions align="start">
+      <button type="submit" [disabled]="!formData.valid" mat-raised-button color="primary">Sign In</button>
+    </mat-card-actions>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="email" name="email" #email="ngModel" ngModel required email>
+    </mat-form-field>
+    <br>
+    <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">Please enter a valid email.</mat-error>
+    <mat-form-field class="example-form">
+      <input matInput type="password" placeholder="app password" name="password" #password="ngModel" ngModel required
+        minlength="6" maxlength="30">
+    </mat-form-field>
+    <span *ngIf="password.invalid && (password.dirty || password.touched)">
+      <mat-error *ngIf="password.errors['required']">Password is Required.</mat-error>
+      <mat-error *ngIf="password.errors['minlength']">Password can't be less than 6 characters.</mat-error>
+      <mat-error *ngIf="password.errors['maxlength']">Password can't be more than 30 characters.</mat-error>
+    </span>
+  </form>
+  <br><br><br><br><br>
+</ng-template>

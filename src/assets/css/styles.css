@@ -1,0 +1,120 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.small-headline {
+  font-family: times, Times New Roman, times-roman, georgia, serif;
+  font-size: 8;
+  line-height: 40px;
+  letter-spacing: -1px;
+  color: #0088cc;
+}
+
+.middle-headline {
+  font-family: times, Times New Roman, times-roman, georgia, serif;
+  font-size: 28px;
+  line-height: 40px;
+  letter-spacing: -1px;
+  color: #0088cc;
+}
+
+.large-headline {
+  font-family: times, Times New Roman, times-roman, georgia, serif;
+  font-size: 48px;
+  line-height: 40px;
+  letter-spacing: -1px;
+  color: #0088cc;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  font-weight: 100;
+}
+
+.small-spacer {
+  margin-left: 10px;
+}
+
+.med-spacer {
+  margin-left: 70px;
+}
+
+.large-spacer {
+  margin-left: 170px;
+}
+
+.body {
+  background-color: white;
+  color: #777777;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10;
+  line-height: 22px;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.circle-link {
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  margin: 8px;
+  background-color: white;
+  border: 1px solid #eeeeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: 1s ease-out;
+}
+
+.circle-link:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.example-icon {
+  padding: 0 7px;
+  color: #777777;
+}
+.example-icon-link {
+  padding: 0 6px;
+  color: steelblue;
+  background-color: white;
+}
+.example-icon-link-large {
+  color: steelblue;
+}
+.mat-menu-item {
+  padding: 0 7px;
+  color: steelblue;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-card {
+  max-width: 100%;
+}
+.example-card-fixed {
+  max-width: 400px;
+}
+.example-header-image {
+  background-image: url('http://localhost:4200/assets/images/sound.gif');
+  background-size: cover;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+.example-full-width {
+  width: 100%;
+}
+mat-chip {
+  max-width: 200px;
+}

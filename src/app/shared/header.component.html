@@ -1,0 +1,279 @@
+<mat-toolbar color="none">
+  <mat-toolbar-row>
+    <button mat-mini-fab color="warn" [matMenuTriggerFor]="rootMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #rootMenu="matMenu">
+      <mat-list>
+          <div mat-subheader>
+              <button mat-menu-item routerLink="/aboutus">
+                <mat-icon class="circle-link example-icon-link">bookmark</mat-icon>About Us
+              </button>
+            </div>
+        <div mat-subheader *ngIf="(data$ | async)?.addressbook.visible">
+          <button mat-menu-item [matMenuTriggerFor]="addressMenu">
+            <mat-icon class="circle-link example-icon-link">book</mat-icon>Address Book
+          </button>
+        </div>
+        <div mat-subheader *ngIf="(data$ | async)?.marketing.visible">
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="marketMenu">
+            <mat-icon class="circle-link example-icon-link">code</mat-icon>Marketing
+          </button>
+        </div>
+        <div mat-subheader *ngIf="(data$ | async)?.calls.visible">
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="callsMenu">
+            <mat-icon class="circle-link example-icon-link">phone</mat-icon>Calls Register
+          </button>
+        </div>
+        <div mat-subheader *ngIf="(data$ | async)?.helpdesk.visible">
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="helpdeskMenu">
+            <mat-icon class="circle-link example-icon-link">help</mat-icon>Helpdesk
+          </button>
+        </div>
+        <div mat-subheader *ngIf="(data$ | async)?.customer.visible">
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="customerMenu">
+            <mat-icon class="circle-link example-icon-link">star</mat-icon>Customer
+          </button>
+        </div>
+        <div mat-subheader *ngIf="(data$ | async)?.payables.visible">
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="payablesMenu">
+            <mat-icon class="circle-link example-icon-link">money</mat-icon>Payables
+          </button>
+        </div>
+        <div mat-subheader *ngIf="(data$ | async)?.reports.visible">
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="reportsMenu">
+            <mat-icon class="circle-link example-icon-link">dashboard</mat-icon>Reports
+          </button>
+        </div>
+        <mat-divider></mat-divider>
+        <div mat-subheader>
+          <mat-divider></mat-divider>
+          <button mat-menu-item routerLink="/settings">
+            <mat-icon class="circle-link example-icon-link">settings</mat-icon>My Account
+          </button>
+        </div>
+        <div mat-subheader *ngIf="(data$ | async)?.admin.visible">
+          <mat-divider></mat-divider>
+          <button mat-menu-item routerLink="/admin">
+            <mat-icon class="circle-link example-icon-link">group</mat-icon>Admin
+          </button>
+        </div>
+        <div mat-subheader>
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="contactMenu">
+            <mat-icon class="circle-link example-icon-link">email</mat-icon>Contact Us
+          </button>
+        </div>
+      </mat-list>
+    </mat-menu>
+    <mat-menu #addressMenu="matMenu">
+      <button mat-menu-item routerLink="/calls">Global Address Book</button>
+      <button mat-menu-item routerLink="/calls">Local Address Book</button>
+    </mat-menu>
+    <mat-menu #marketMenu="matMenu">
+      <button mat-menu-item routerLink="/calls">Campaigns</button>
+      <button mat-menu-item routerLink="/calls">Leads</button>
+      <button mat-menu-item routerLink="/calls">Oppurtunities</button>
+      <button mat-menu-item routerLink="/calls">Expenses</button>
+    </mat-menu>
+    <mat-menu #callsMenu="matMenu">
+      <button mat-menu-item routerLink="/calls">Calls</button>
+      <button mat-menu-item routerLink="/calls">eMails</button>
+      <button mat-menu-item routerLink="/calls">enquiry</button>
+      <button mat-menu-item routerLink="/calls">visits</button>
+      <button mat-menu-item routerLink="/calls">Expenses</button>
+    </mat-menu>
+    <mat-menu #helpdeskMenu="matMenu">
+      <button mat-menu-item routerLink="/calls">Service tickets</button>
+      <button mat-menu-item routerLink="/calls">Work Orders</button>
+      <button mat-menu-item routerLink="/calls">Expenses</button>
+    </mat-menu>
+    <mat-menu #customerMenu="matMenu">
+      <button mat-menu-item routerLink="/calls">Customer Contants</button>
+      <button mat-menu-item routerLink="/calls">Invoice/Bills</button>
+      <button mat-menu-item routerLink="/calls">Sales</button>
+    </mat-menu>
+    <mat-menu #payablesMenu="matMenu">
+      <button mat-menu-item routerLink="/calls">Vendor Contacts</button>
+      <button mat-menu-item routerLink="/calls">Pay Vendor</button>
+    </mat-menu>
+    <mat-menu #reportsMenu="matMenu">
+      <button mat-menu-item routerLink="/calls">Report 1</button>
+      <button mat-menu-item routerLink="/calls">Report 2</button>
+      <button mat-menu-item routerLink="/calls">Report 3</button>
+      <button mat-menu-item routerLink="/calls">Report 4</button>
+    </mat-menu>
+    <mat-menu #contactMenu="matMenu">
+      <a href="{{ configData.fblink }}" target="_blank">
+        <button mat-menu-item>
+          <mat-icon matTooltip="connect with FaceBook" svgIcon="facebook"></mat-icon>
+        </button>
+      </a>
+      <a href="{{ configData.linkedin }}" target="_blank">
+        <button mat-menu-item>
+          <mat-icon matTooltip="connect with LinkedIn" svgIcon="linkedin"></mat-icon>
+        </button>
+      </a>
+      <a href="{{ configData.github }}" target="_blank">
+        <button mat-menu-item>
+          <mat-icon matTooltip="connect with GitHub" svgIcon="github"></mat-icon>
+        </button>
+      </a>
+      <a href="{{ configData.emailid }}" target="_blank">
+        <button mat-menu-item>
+          <mat-icon matTooltip="email">email</mat-icon>
+        </button>
+      </a>
+    </mat-menu>
+    <mat-icon class="example-icon">{{ imageUrl }}</mat-icon>
+    <span matTooltip="About us">{{ pageTitle }}</span><span class="example-spacer"></span>
+    <span matTooltip="Update Settings"><button mat-icon-button routerLink="/settings">
+        <mat-icon>settings</mat-icon>
+      </button></span>
+    <span matTooltip="Help" [matMenuTriggerFor]="helpMenu">
+      <button mat-icon-button>
+        <mat-icon>help</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-menu #helpMenu="matMenu">
+  {{ helpType == "login" ? configData.login : ""}}
+  {{ helpType == "register" ? configData.register : ""}}
+  {{ helpType == "checkin" ? configData.checkin : ""}}
+  {{ helpType == "checkout" ? configData.checkout : ""}}
+  {{ helpType == "aboutus" ? configData.aboutus : ""}}
+  {{ helpType == "employee" ? configData.employee : ""}}
+  {{ helpType == "config" ? configData.config : ""}}
+</mat-menu>
+
+<!-- <mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened>
+    <p>
+      <img src="assets/images/ERP.png">
+    </p>
+    <mat-divider></mat-divider>
+    <p *ngIf="showFiller" class="middle-headline">
+      Login/Signup<br/>
+Admin - Manager Users ->  Admin
+          Temp Staff
+          Employee
+          Manager
+AddressBook -> 
+            Global Addressbook
+            Local Addressbook
+Marketing -> 
+            Campaigns
+            Leads
+            Oppurtunities
+            Expenses
+
+Call Register -> 
+            Calls
+            eMails
+            enquiry
+            visits
+            Expenses
+
+Helpdesk -> Service tickets
+            workorders
+            Expenses
+
+Customer -> Invoice/Bills
+        -> Sales Register
+
+Payables -> Setup Vendor
+        -> Voucher for Vendor
+        -> Pay Vendor
+Reports ->
+    </p>
+
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      More...
+    </button>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+
+    <mat-toolbar color="none">
+      <mat-toolbar-row>
+        <button mat-fab aria-label="Menu" color="primary" (click)="drawer.toggle()">
+          <mat-icon class="example-icon-link circle-link">menu</mat-icon>
+          <div mat-card-avatar class="example-header-image"></div>
+        </button>
+        <mat-icon class="example-icon">{{ imageUrl }}</mat-icon>
+        <span class="example-icon">{{ pageTitle }}</span>
+        <span class="example-spacer"></span>
+        <mat-icon class="example-icon-link circle-link" [matMenuTriggerFor]="helpMenu">help</mat-icon>
+        <mat-icon class="example-icon-link circle-link" [matMenuTriggerFor]="langMenu">language</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    
+    <mat-menu #rootMenu="matMenu">
+      <div class="example-ripple-container mat-elevation-z4">
+        <button mat-menu-item routerLink="/login">
+          <mat-icon class="circle-link example-icon-link">dashboard</mat-icon>Home
+        </button>
+      </div>
+    
+      <button mat-menu-item routerLink="/aboutus">
+        <mat-icon class="circle-link example-icon-link">bookmark</mat-icon>About us
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="adminMenu">
+        <mat-icon class="circle-link example-icon-link">settings</mat-icon>Settings
+      </button>
+    </mat-menu>
+    <mat-menu #adminMenu="matMenu">
+      <button mat-menu-item routerLink="/config">
+        <mat-icon class="circle-link example-icon-link">menu</mat-icon>Configure App Branding
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="employeeMenu">
+        <mat-icon class="circle-link example-icon-link">person</mat-icon>manage Employee
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="reportMenu">
+        <mat-icon class="circle-link example-icon-link">book</mat-icon>Reports
+      </button>
+      <button mat-menu-item routerLink="/login">
+        <mat-icon class="circle-link example-icon-link">lock</mat-icon>My account
+      </button>
+    </mat-menu>
+    <mat-menu #reportMenu="matMenu">
+        <button mat-menu-item routerLink="/reports">
+          <mat-icon class="circle-link example-icon-link">book</mat-icon>Visitors by date
+        </button>
+        <button mat-menu-item routerLink="/reports">
+          <mat-icon class="circle-link example-icon-link" color="warn">book</mat-icon>evacuate premise
+        </button>
+      </mat-menu>
+      <mat-menu #employeeMenu="matMenu">
+          <button mat-menu-item routerLink="/host" disabled>
+            <mat-icon class="circle-link example-icon-link">person</mat-icon>Sync Employee LDAP
+          </button>
+          <button mat-menu-item routerLink="/host">
+            <mat-icon class="circle-link example-icon-link">person</mat-icon>manage Employee
+          </button>
+        </mat-menu>
+    <mat-menu #langMenu="matMenu">
+      <button mat-menu-item mat-elevation-z4>
+        English
+      </button>
+    </mat-menu>
+    <mat-menu #helpMenu="matMenu">
+        <div class="example-icon">
+            {{ helpType == "login" ? configData.login : ""}}
+          {{ helpType == "register" ? configData.register : ""}}
+          {{ helpType == "checkin" ? configData.checkin : ""}}
+          {{ helpType == "checkout" ? configData.checkout : ""}}
+          {{ helpType == "aboutus" ? configData.aboutus : ""}}
+          {{ helpType == "employee" ? configData.employee : ""}}
+          {{ helpType == "config" ? configData.config : ""}}
+        </div>
+    </mat-menu>
+  </div>
+</mat-drawer-container> -->
