@@ -98,7 +98,7 @@ service cloud.firestore {<br/>
     function isDocOwner(){<br/>
     // assuming document has a field author which is uid<br/>
     // Only the authenticated user who authored the document can read or write<br/>
-    	return request.auth.uid == request.resource.data.author;<br/>
+    	return request.auth.uid == resource.data.author;<br/>
       // This above read query will fail<br/>
     // The query fails even if the current user actually is the author of every story document.<br/>
     //  The reason for this behavior is that when Cloud Firestore applies your security rules, <br/>
