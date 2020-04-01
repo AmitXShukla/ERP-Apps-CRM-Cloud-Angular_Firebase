@@ -35,7 +35,7 @@
         <mat-error *ngIf="phone.invalid && (phone.dirty || phone.touched)">Please enter a valid phone.</mat-error>
         <br />
         <mat-form-field class="example-form">
-          <input matInput placeholder="Role" name="role" #role="ngModel" [ngModel]="data$?.role">
+          <input matInput readonly placeholder="Role" name="role" #role="ngModel" [ngModel]="data$?.role">
         </mat-form-field>
         <br/><br/><br/><br/><br/>
       </mat-card-content>
