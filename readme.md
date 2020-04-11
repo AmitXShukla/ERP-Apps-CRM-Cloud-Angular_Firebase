@@ -26,7 +26,7 @@ Other Apps -> Warehouse Management App<br/>
 
 <b>Community Version</b> - All apps are Free download with complete source code for iOS, Android and web.
 ## Technologies
-Click here for Video Tutorials !
+<a href="https://www.youtube.com/playlist?list=PLp0TENYyY8lHNMTAlrfVQKzAvQo3yzHYk">Click here for Video Tutorials !</a>
 #### Option 1:
 <b>FrontEnd:</b> Flutter/DART<br/>
 <b>Backend:</b> NodeJS/REST API<br/>
@@ -37,7 +37,6 @@ Click here for Video Tutorials !
 <b>Backend:</b> NodeJS/REST API<br/>
 <b>Mobile:</b> Apache Cordova (iOS, Android)<br/>
 <b>Database:</b> MYSQL or Oracle<br/>
-# Do NOT Clone yet, this repository is work in progress and is not complete yet.
 
 # Pro - ERP
 HCM<br/>
