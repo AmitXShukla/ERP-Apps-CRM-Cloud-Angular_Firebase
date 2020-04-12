@@ -89,9 +89,8 @@ please copy paste these rules as-is and make sure, there are no errors anywhere.
             // return request.resource.data.role == null || request.resource.data.role == resource.data.role;
             return request.resource.data.role == "" || request.resource.data.role == resource.data.role;
     }
-    
-}<br>
-}<br>
+    }
+    }
 
 <br/><br/>
 <h4>Step 5: Create new data collection</h4>
