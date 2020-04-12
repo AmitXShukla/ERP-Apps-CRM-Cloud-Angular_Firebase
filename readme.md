@@ -38,38 +38,41 @@ inside your project, click on authentication and enable
 email/password, Google and Facebook authentication methods<br><br>
 now setup Firebase rules<br>
 please copy paste these rules as-is and make sure, there are no errors anywhere.<br><br>
-rules_version = '2';<br>
-service cloud.firestore {<br>
-  match /databases/{database}/documents {<br>
-    match /{document=**} {<br>
-      allow read, write: if false;<br>
-    }<br>
-    <br>
-  match /USER_ROLES/{document} {<br>
-   allow read: if isSignedIn();<br>
-   allow write, delete: if false;<br>
-   }<br>
-   match /USER_SETTINGS/{document} {<br>
-   allow read: if (isSignedIn() && isDocOwner()) || isAdmin();<br>
-   allow create: if isSignedIn();<br>
-   allow update: if (isDocOwner() && onlyContentChanged()) || isAdmin();<br>
-   allow delete: if isAdmin();<br>
-   }<br>
-  // helper functions<br>
-    function isDocOwner(){<br>
-    // assuming document has a field author which is uid<br>
-    // Only the authenticated user who authored the document can read or write<br>
-    	return request.auth.uid == resource.data.author;<br>
-      // This above read query will fail<br>
-    // The query fails even if the current user actually is the author of every story document.<br>
-    //  The reason for this behavior is that when Cloud Firestore applies your security rules, <br>
-    //  it evaluates the query against its potential result set,<br>
-    //   not against the actual properties of documents in your database. <br>
-    //   If a query could potentially include documents that violate your security rules, <br>
-    //   the query will fail.<br>
-    //   to prevent failure, on your client app, make sure to include following<br>
-    //   .where("author", "==", this.afAuth.auth.currentUser.uid)<br>
-    }<br>
+    
+    
+    rules_version = '2';
+    service cloud.firestore {
+    match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+      match /USER_ROLES/{document} {
+    allow read: if isSignedIn();
+    allow write, delete: if false;
+    }
+    match /USER_SETTINGS/{document} {
+    allow read: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow create: if isSignedIn();
+    allow update: if (isDocOwner() && onlyContentChanged()) || isAdmin();
+    allow delete: if isAdmin();
+    }
+    // helper functions
+    function isDocOwner(){
+    // assuming document has a field author which is uid
+    // Only the authenticated user who authored the document can read or write
+    	return request.auth.uid == resource.data.author;
+      // This above read query will fail
+    // The query fails even if the current user actually is the author of every story document.
+    //  The reason for this behavior is that when Cloud Firestore applies your security rules, 
+    //  it evaluates the query against its potential result set,
+    //   not against the actual properties of documents in your database. 
+    //   If a query could potentially include documents that violate your security rules, 
+    //   the query will fail.
+    //   to prevent failure, on your client app, make sure to include following
+    //   .where("author", "==", this.afAuth.auth.currentUser.uid)
+    }
+    
     
     function isSignedIn() {
     // check if user is signed in
@@ -86,6 +89,7 @@ service cloud.firestore {<br>
             // return request.resource.data.role == null || request.resource.data.role == resource.data.role;
             return request.resource.data.role == "" || request.resource.data.role == resource.data.role;
     }
+    
 }<br>
 }<br>
 
