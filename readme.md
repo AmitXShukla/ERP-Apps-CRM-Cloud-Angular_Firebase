@@ -95,6 +95,16 @@ please copy paste these rules as-is and make sure, there are no errors anywhere.
 <br/><br/>
 <h4>Step 5: Create new data collection</h4>
 as shown in this screen and make sure all documents/fields look exactly the same.<br/>
+<a href="https://www.youtube.com/playlist?list=PLp0TENYyY8lHNMTAlrfVQKzAvQo3yzHYk">YouTube video Part -1 @ 13:08</a>
+<br/><br/>
+USER_ROLES is a collection<br/>
+admin is a document inside it<br/>
+admin, addressbook etc each has a “map” inside<br/>
+Which has four fields each<br/>
+visible Boolean true<br/>
+read Boolean true<br/>
+write Boolean true<br/>
+delete Boolean true<br/>
 <h4>Step 6: find Firebase Project settings</h4>
 copy and replace Firebase settings in your app->environments/environment.ts and environment.prod.ts<br/>
 
