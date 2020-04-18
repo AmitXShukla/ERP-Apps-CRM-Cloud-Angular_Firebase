@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { moveIn, fallIn } from '../../shared/router.aimations';
+import { moveIn, fallIn } from '../../shared/router.animations';
 import { environment } from '../../../environments/environment';
 import { BackendService } from '../../services/backend.service';
 import { DBInBoundData, DBOutBoundData } from '../../services/datamodel';

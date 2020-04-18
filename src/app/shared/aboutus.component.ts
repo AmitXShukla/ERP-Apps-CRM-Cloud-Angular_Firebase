@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BackendService} from '../services/backend.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-aboutus',
@@ -9,9 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class AboutusComponent implements OnInit {
 
-  constructor(private _backendService: BackendService) { }
+  constructor() { }
 
   ngOnInit(): void {
-
   }
+
 }

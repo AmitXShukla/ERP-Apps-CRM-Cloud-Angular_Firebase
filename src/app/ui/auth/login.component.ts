@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { moveIn, fallIn } from '../../shared/router.aimations';
+import { moveIn, fallIn } from '../../shared/router.animations';
 import { environment } from '../../../environments/environment';
 import { BackendService } from '../../services/backend.service';
 import { DBInBoundData, DBOutBoundData } from '../../services/datamodel';
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   showFiller: boolean = true;
   socialAuth: boolean = false; // show Google and FB Sign in only when social auth is enabled
   state: string = ''; // required for router animation
-  dataLoading: boolean = false; // spinner boolean
+  dataLoading: boolean = false; // spinner booleana
   IBData: DBInBoundData; // inbound data
   OBData: DBOutBoundData; // outbound data
 
@@ -67,17 +67,6 @@ export class LoginComponent implements OnInit {
   }
 
   logout() {
-    // this.dataLoading = true;
-    // return this._backendService.logout().then(res => {
-    //   this.IBData.error = false;
-    //   window.localStorage.removeItem("authtoken");
-    //   this.IBData.statusCode = 0;
-    // }).catch(error => {
-    //   this.IBData.error = true;
-    //   this.IBData.statusCode = 0;
-    //   this.IBData.statusMessage = error;
-    // }).then(r => this.dataLoading = false);
-    window.localStorage.removeItem("authUIToken");
     this.auth.signOut();
   }
 }

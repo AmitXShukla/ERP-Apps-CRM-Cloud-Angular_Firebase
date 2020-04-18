@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BackendService} from '../services/backend.service';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-simpleheader',
@@ -11,10 +11,11 @@ export class SimpleheaderComponent implements OnInit {
   @Input() pageTitle: string;
   @Input() helpType: string;
   configData;
-  showFiller = true;
+
   constructor(private _backendService: BackendService) { }
 
   ngOnInit(): void {
     this.configData = this._backendService.getConfig("helptext");
   }
+
 }

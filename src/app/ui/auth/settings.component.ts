@@ -1,77 +1,33 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { BackendService } from '../../services/backend.service';
-import { Observable } from 'rxjs';
-import { switchMap, take, map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { NgZone } from '@angular/core';
+import { BackendService } from '../../services/backend.service';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent implements OnInit, OnDestroy {
-  docId: string = '';
-  state: string = '';
+export class SettingsComponent implements OnInit {
+  savedChanges: boolean = false;
+  dataLoading: boolean = false;
   error: boolean = false;
   errorMessage: String = "";
-  dataLoading: boolean = false;
-  // data$: Observable<any>;
-  savedChanges: boolean = false;
+  authState: any = null;
+  newUser: boolean = false;
   data$;
-  userRole;
-  private querySubscription;
 
-  constructor(public auth: AngularFireAuth, private _backendService: BackendService,
-    private _router: Router, private ngZone: NgZone) {
-  }
+  constructor(public afAuth: AngularFireAuth, private _backendService: BackendService) { }
 
-  ngOnInit() {
-    this.auth.currentUser.then(res => {
-      if (res) {
-        this.docId = res.uid;
-        this.getUserDoc(res.uid);
-      }
+  ngOnInit(): void {
+    this.afAuth.authState.subscribe(authState => {
+      this.authState = authState;
+      this.getUserDoc();
     })
-      .catch(e => {
-        if (e) {
-          this.error = true;
-          this.errorMessage = e.message;
-          this.dataLoading = false;
-        }
-      });
   }
 
-  // getUserDoc(docId) {
-  //   this.dataLoading = true;
-  //   this.data$ = this._backendService.getDoc("USERS", docId);
-  //   this.dataLoading = false;
-  // }
-  getUserDoc(docId) {
+  onSubmit_newuser(formData) {
     this.dataLoading = true;
-     return this._backendService.getDoc("USERS", docId).subscribe(
-      (res) => {
-        this.data$ = res;
-        this.dataLoading = false;
-      },
-      error => {
-        this.error = true;
-        this.errorMessage = error;
-        this.dataLoading = false;
-      },
-      () => this.dataLoading = false
-    );
-    // this.data$ = this._backendService.getDoc("USERS", docId)
-    // .pipe(
-    //   switchMap(res => this.userRole = this._backendService.getDoc("ROLES", res["role"]))
-    // );
-    // this.dataLoading = false;
-  }
-
-  onSubmit(formData) {
-    this.dataLoading = true;
-    this._backendService.setUserDoc("USERS", this.docId, formData)
+    this._backendService.setUserDoc("USERS", this.authState.uid, formData)
       .then(
         res => {
           if (res) {
@@ -88,19 +44,48 @@ export class SettingsComponent implements OnInit, OnDestroy {
         }
       });
   }
+  onSubmit_update(formData) {
+    this.dataLoading = true;
+    this._backendService.updateDoc("USERS", this.authState.uid, formData)
+      .then(
+        res => {
+          if (res) {
+            this.savedChanges = true;
+            this.errorMessage = "Changes are saved";
+            this.dataLoading = false;
+          }
+        })
+      .catch(e => {
+        if (e) {
+          this.error = true;
+          this.errorMessage = e.message;
+          this.dataLoading = false;
+        }
+      });
+  }
+  getUserDoc() {
+    this.dataLoading = true;
+    return this._backendService.getDoc("USERS", this.authState.uid).subscribe(
+      (res) => {
+        if (res) {
+          this.data$ = res;
+        } else {
+          this.newUser = true;
+        }
 
-  logout() {
-    this.auth.signOut().then(r => {
-      this.ngZone.run(() =>
-        this._router.navigate(['/login'])
-      );
-    }
+        this.dataLoading = false;
+      },
+      error => {
+        this.error = true;
+        this.errorMessage = error;
+        this.dataLoading = false;
+      },
+      () => this.dataLoading = false
     );
   }
-  ngOnDestroy() {
-    // this is not needed when observable is used, in this case, we are registering user on subscription
-    if (this.querySubscription) {
-      this.querySubscription.unsubscribe();
-    }
+
+  logout() {
+    this.afAuth.signOut();
   }
+
 }

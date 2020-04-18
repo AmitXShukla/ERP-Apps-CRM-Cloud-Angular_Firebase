@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BackendService } from  '../services/backend.service';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,4 +14,5 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
     this.configData = this._backendService.getConfig("social");
   }
+
 }
