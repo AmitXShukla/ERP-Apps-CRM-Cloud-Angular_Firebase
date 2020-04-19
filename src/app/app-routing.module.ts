@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToItems = () => redirectLoggedInTo(['aboutus']);
-const redirectLoggedInToSettings = () => redirectLoggedInTo(['login']);
+const redirectLoggedInToSettings = () => redirectLoggedInTo(['settings']);
 const hasRole = () => map(user => user ? ['settings'] : ['login']);
 
 const routes: Routes = [
