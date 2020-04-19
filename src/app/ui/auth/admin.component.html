@@ -11,7 +11,7 @@
           <span class="med-spacer"></span>
           <span class="small-spacer"></span>
           <span matTooltip="Show Recent Results">
-            <mat-icon color="primary" (click)="toggle('resMode');getData();" svgIcon="cached"></mat-icon>
+            <mat-icon color="primary" (click)="toggle('resMode');getData();">cached</mat-icon>
           </span>
         </mat-card-actions>
         <mat-form-field class="example-form">
@@ -35,7 +35,7 @@
     <mat-error *ngIf="savedChanges">
       Data is saved.
       <label class="small-spacer"></label>
-      <mat-icon (click)="this.editDataForm.reset();savedChanges=false;toggle('searchMode');" svgIcon="clear"></mat-icon>
+      <mat-icon (click)="this.editDataForm.reset();savedChanges=false;toggle('searchMode');">clear</mat-icon>
     </mat-error>
     <div *ngIf="!savedChanges">
       <mat-progress-bar mode="indeterminate" *ngIf="dataLoading"></mat-progress-bar>
@@ -45,11 +45,11 @@
           color="primary">Update</button>
         <span class="med-spacer"></span>
         <span matTooltip="Search">
-          <mat-icon color="primary" (click)="toggle('searchMode')" svgIcon="search"></mat-icon>
+          <mat-icon color="primary" (click)="toggle('searchMode')">search</mat-icon>
         </span>
         <span class="small-spacer"></span>
         <span matTooltip="Shwo Recent Results">
-          <mat-icon color="primary" (click)="toggle('resMode');getData();" svgIcon="cached"></mat-icon>
+          <mat-icon color="primary" (click)="toggle('resMode');getData();">cached</mat-icon>
         </span>
       </mat-card-actions>
       <mat-form-field>
@@ -84,12 +84,12 @@
     <span class="med-spacer"></span>
     <span class="med-spacer"></span>
     <span class="med-spacer"></span>
-    <span matTooltip="Add New">
-      <mat-icon color="primary" (click)="toggle('addMode')" svgIcon="add"></mat-icon>
-    </span>
+    <!-- <span matTooltip="Add New">
+      <mat-icon color="primary" (click)="toggle('addMode')">add</mat-icon>
+    </span> -->
     <span class="small-spacer"></span>
     <span matTooltip="Search All">
-      <mat-icon color="primary" (click)="toggle('searchMode')" svgIcon="search"></mat-icon>
+      <mat-icon color="primary" (click)="toggle('searchMode')">search</mat-icon>
     </span>
   </mat-card-actions>
   <div class="example-header">
