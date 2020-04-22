@@ -26,6 +26,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   errorMessage: String = "";
   dataLoading: boolean = false;
   private querySubscription;
+  roleTypes = ['employee', 'admin'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

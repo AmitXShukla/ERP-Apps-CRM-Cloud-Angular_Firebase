@@ -71,10 +71,18 @@
       </mat-form-field>
       <br>
       <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select name="role" id="role" [ngModel]="(data$ | async)?.role" required>
+          <mat-option *ngFor="let a of roleTypes" [value]="a">
+            {{ a }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field>
         <input matInput placeholder="role" name="role" id="role" [ngModel]="(data$ | async)?.role" required
           minlength="1">
         <mat-hint align="end">eg employee</mat-hint>
-      </mat-form-field>
+      </mat-form-field> -->
     </div>
   </form>
 </ng-template>

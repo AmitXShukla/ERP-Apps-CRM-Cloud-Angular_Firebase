@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { BackendService } from '../../services/backend.service';
 
@@ -16,7 +17,7 @@ export class SettingsComponent implements OnInit {
   newUser: boolean = false;
   data$;
 
-  constructor(public afAuth: AngularFireAuth, private _backendService: BackendService) { }
+  constructor(public afAuth: AngularFireAuth, private _backendService: BackendService, private _router: Router) { }
 
   ngOnInit(): void {
     this.afAuth.authState.subscribe(authState => {
@@ -72,10 +73,10 @@ export class SettingsComponent implements OnInit {
         } else {
           this.newUser = true;
         }
-
         this.dataLoading = false;
       },
       error => {
+        this.newUser = true;
         this.error = true;
         this.errorMessage = error;
         this.dataLoading = false;
@@ -85,7 +86,10 @@ export class SettingsComponent implements OnInit {
   }
 
   logout() {
-    this.afAuth.signOut();
+    this.afAuth.signOut().then(res => {
+      this._router.navigate(['/login']);
+    }).catch(e => {
+      this._router.navigate(['/login'])
+  });
   }
-
 }
