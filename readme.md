@@ -1,3 +1,4 @@
+# Please give a Star * to this repository if you like this project.
 # ERP-Apps
 # Objective
 Build ERP apps for Small, Medium and Large Organizations<br/>
