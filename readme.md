@@ -47,56 +47,48 @@ please copy paste these rules as-is and make sure, there are no errors anywhere.
 ```
     
     rules_version = '2';
-    service cloud.firestore {
-    match /databases/{database}/documents {
+service cloud.firestore {
+  match /databases/{database}/documents {
     match /{document=**} {
       allow read, write: if false;
     }
-    
-      match /USER_ROLES/{document} {
+    match /USER_ROLES/{document} {
     allow read: if isSignedIn();
-    allow write, delete: if false;
     }
     match /USER_SETTINGS/{document} {
     allow read: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow create: if isSignedIn() && onlyContentChanged();
+    allow update: if (isSignedIn() && isDocOwner() && onlyContentChanged()) || isAdmin();
+    allow delete: if isAdmin();
+    }
+    match /USER_ADDRESSBOOK/{document=**} {
+    allow read: if (isSignedIn() && isEmployee()) || isAdmin();
     allow create: if isSignedIn();
-    allow update: if (isDocOwner() && onlyContentChanged()) || isAdmin();
+    allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
     allow delete: if isAdmin();
     }
     // helper functions
-    function isDocOwner(){
-    // assuming document has a field author which is uid
-    // Only the authenticated user who authored the document can read or write
-    	return request.auth.uid == resource.data.author;
-      // This above read query will fail
-    // The query fails even if the current user actually is the author of every story document.
-    //  The reason for this behavior is that when Cloud Firestore applies your security rules, 
-    //  it evaluates the query against its potential result set,
-    //   not against the actual properties of documents in your database. 
-    //   If a query could potentially include documents that violate your security rules, 
-    //   the query will fail.
-    //   to prevent failure, on your client app, make sure to include following
-    //   .where("author", "==", this.afAuth.auth.currentUser.uid)
-    }
-    
-    
     function isSignedIn() {
-    // check if user is signed in
-          return request.auth.uid != null;
+    return request.auth.uid != null;
     }
-    
+    function onlyContentChanged() {
+    return request.resource.data.role == "" || request.resource.data.role == resource.data.role;
+    // make sure user is not signing in with any role or changin his role during update
+    }
+    function isDocOwner() {
+    return request.auth.uid == resource.data.author;
+    }
+    function isDocCreater() {
+    return request.auth.uid == request.resource.data.author;
+    }
     function isAdmin() {
     return get(/databases/$(database)/documents/USER_SETTINGS/$(request.auth.uid)).data.role == "admin";
     }
-    
-    function onlyContentChanged() {
-          // Ensure that user is not updating their own roles
-          // fields are added to the document.
-            // return request.resource.data.role == null || request.resource.data.role == resource.data.role;
-            return request.resource.data.role == "" || request.resource.data.role == resource.data.role;
+    function isEmployee() {
+    return get(/databases/$(database)/documents/USER_SETTINGS/$(request.auth.uid)).data.role == "employee";
     }
-    }
-    }
+}
+}
 
 ```ts
 Step 5: Create new data collection
