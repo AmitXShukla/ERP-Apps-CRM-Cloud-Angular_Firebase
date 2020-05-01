@@ -47,11 +47,12 @@ please copy paste these rules as-is and make sure, there are no errors anywhere.
 ```
     
     rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
+    service cloud.firestore {
+    match /databases/{database}/documents {
     match /{document=**} {
       allow read, write: if false;
     }
+    
     match /USER_ROLES/{document} {
     allow read: if isSignedIn();
     }
@@ -87,8 +88,8 @@ service cloud.firestore {
     function isEmployee() {
     return get(/databases/$(database)/documents/USER_SETTINGS/$(request.auth.uid)).data.role == "employee";
     }
-}
-}
+    }
+    }
 
 ```ts
 Step 5: Create new data collection
