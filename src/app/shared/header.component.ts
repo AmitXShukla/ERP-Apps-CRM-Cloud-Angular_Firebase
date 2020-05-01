@@ -28,7 +28,8 @@ export class HeaderComponent implements OnInit {
     return this._backendService.getDoc("USERS", this.authState.uid).subscribe(
       (res) => {
         if (res) {
-          this.data$ = this._backendService.getDoc("ROLES", res["role"])
+          this.data$ = this._backendService.getDoc("ROLES", res["role"]);
+          this._backendService.setRole(this.data$);
         }
       },
       error => {},

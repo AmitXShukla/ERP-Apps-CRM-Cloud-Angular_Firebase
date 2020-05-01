@@ -11,7 +11,14 @@ import { FooterComponent } from './shared/footer.component';
 import { SimpleheaderComponent } from './shared/simpleheader.component';
 import { LoginComponent } from './ui/auth/login.component';
 import { SignupComponent } from './ui/auth/signup.component';
-import { AdminComponent } from './ui/auth/admin.component'; 
+import { AdminComponent } from './ui/auth/admin.component';
+import { AddressComponent } from './ui/addressbook/address.component';
+
+// CRM Cloud
+import { CampaignComponent } from './ui/market/campaign.component';
+import { LeadComponent } from './ui/market/lead.component';
+import { OppurtunityComponent } from './ui/market/oppurtunity.component';
+import { ExpensesComponent } from './ui/market/expenses.component';
 
 // material imports
 import { HttpClientModule } from '@angular/common/http';
@@ -52,6 +59,14 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { SettingsComponent } from './ui/auth/settings.component';
 import { HeaderComponent } from './shared/header.component';
+// file upload
+import { FileUploadComponent } from './shared/dropzone/fileupload.component';
+import { DropZoneDirective } from './shared/dropzone/dropzone.directive';
+import { FileSizePipe } from './shared/dropzone/filesize.pipe';
+import { WarehouseComponent } from './ui/warehouse/warehouse.component';
+import { BuytopayComponent } from './ui/buytopay/buytopay.component';
+import { ReceivableComponent } from './ui/receivable/receivable.component';
+import { BookkeepingComponent } from './ui/bookkeeping/bookkeeping.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +78,19 @@ import { HeaderComponent } from './shared/header.component';
     SignupComponent,
     AdminComponent,
     SettingsComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddressComponent,
+    FileUploadComponent,
+    DropZoneDirective,
+    FileSizePipe,
+    CampaignComponent,
+    LeadComponent,
+    OppurtunityComponent,
+    ExpensesComponent,
+    WarehouseComponent,
+    BuytopayComponent,
+    ReceivableComponent,
+    BookkeepingComponent
   ],
   imports: [
     BrowserModule,
@@ -109,22 +136,22 @@ import { HeaderComponent } from './shared/header.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  constructor(iconRegistry: MatIconRegistry,  sanitizer: DomSanitizer){
+export class AppModule {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
 
     iconRegistry.addSvgIcon(
       'facebook',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/fb.svg')
     ),
-    iconRegistry.addSvgIcon(
-      'linkedin',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/linkedin.svg')
-    ),
-    iconRegistry.addSvgIcon(
-      'github',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/github.svg')),
       iconRegistry.addSvgIcon(
-      'twitter',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/twitter_1.svg'));
+        'linkedin',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/linkedin.svg')
+      ),
+      iconRegistry.addSvgIcon(
+        'github',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/github.svg')),
+      iconRegistry.addSvgIcon(
+        'twitter',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icons/twitter_1.svg'));
   }
 }

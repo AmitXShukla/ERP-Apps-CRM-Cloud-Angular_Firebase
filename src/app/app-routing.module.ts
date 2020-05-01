@@ -5,6 +5,13 @@ import { LoginComponent } from './ui/auth/login.component';
 import { SignupComponent } from './ui/auth/signup.component';
 import { AdminComponent } from './ui/auth/admin.component';
 import { SettingsComponent } from './ui/auth/settings.component';
+import { AddressComponent } from './ui/addressbook/address.component';
+
+// CRM Cloud
+import { CampaignComponent } from './ui/market/campaign.component';
+import { LeadComponent } from './ui/market/lead.component';
+import { OppurtunityComponent } from './ui/market/oppurtunity.component';
+import { ExpensesComponent } from './ui/market/expenses.component';
 
 // firebase auth guard]
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
@@ -20,10 +27,15 @@ const hasRole = () => map(user => user ? ['settings'] : ['login']);
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'aboutus', component: AboutusComponent,  ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'addressbook', component: AddressComponent,  ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'login', component: LoginComponent, ...canActivate(redirectLoggedInToSettings) },
   { path: 'signup', component: SignupComponent, ...canActivate(redirectLoggedInToSettings) },
   { path: 'settings', component: SettingsComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'admin', component: AdminComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'campaign', component: CampaignComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'lead', component: LeadComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'oppurtunity', component: OppurtunityComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'expense', component: ExpensesComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 

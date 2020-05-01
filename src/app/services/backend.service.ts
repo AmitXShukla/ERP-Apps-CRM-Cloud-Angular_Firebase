@@ -3,13 +3,21 @@ import { environment } from '../../environments/environment';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { firestore } from 'firebase/app';
+import { Subject }    from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
   configData;
+  private userRoleSource = new Subject<string>();
+  userRole$ = this.userRoleSource.asObservable();
 
-  constructor(public afAuth: AngularFireAuth, private _afs: AngularFirestore) { }
+  constructor(public afAuth: AngularFireAuth, private _afs: AngularFirestore,
+    private _storage: AngularFireStorage) {   
+  }
 
   getConfig(configType) {
     configType == "social" ? this.configData = environment.social : "";
@@ -33,6 +41,7 @@ return this.afAuth.signInWithEmailAndPassword(formData.data.email, formData.data
     let _coll = "USER_SETTINGS";
     if (coll == "USERS") { _coll = "USER_SETTINGS"; }
     if (coll == "ROLES") { _coll = "USER_ROLES"; }
+    if (coll == "ADDRESSBOOK") { _coll = "USER_ADDRESSBOOK"; }
     return _coll;
   }
 
@@ -56,7 +65,7 @@ return this.afAuth.signInWithEmailAndPassword(formData.data.email, formData.data
   updateDoc(coll,docId, data) {
     const timestamp = this.timestamp
     var docRef = this._afs.collection(this.getCollUrls(coll)).doc(docId);
-    return docRef.set({
+    return docRef.update({
       ...data,
       updatedAt: timestamp,
     }).then((res) => { return true; });
@@ -73,13 +82,48 @@ return this.afAuth.signInWithEmailAndPassword(formData.data.email, formData.data
   getDocs(coll: string, formData?) {
     if (formData) {
       if (formData.name) {
-        return this._afs.collection(this.getCollUrls(coll), ref => ref.where('name', '==', formData.name)).valueChanges();
+        return this._afs.collection(this.getCollUrls(coll), ref => ref.where('name', '>=', formData.name)).valueChanges();
       }
-      if (formData.email) {
-        return this._afs.collection(this.getCollUrls(coll), ref => ref.where('email', '>=', formData.email)).valueChanges();
+      if (formData.phone) {
+        return this._afs.collection(this.getCollUrls(coll), ref => ref.where('phone', '>=', formData.phone)).valueChanges();
       }
     } else { // no search critera - fetch all docs
       return this._afs.collection(this.getCollUrls(coll)).valueChanges();
     }
+  }
+
+  setDoc(coll: string, data: any, authorID: any) {
+    let docId;
+    const id = this._afs.createId();
+    const item = { id, name };
+    if (docId) { item.id = docId; }
+    const timestamp = this.timestamp
+    var docRef = this._afs.collection(this.getCollUrls(coll)).doc(item.id);
+    return docRef.set({
+      ...data,
+      _id: id,
+      author: authorID,
+      updatedAt: timestamp,
+      createdAt: timestamp
+    }).then((res) => { return id; });
+  }
+
+  updateFileUpload(coll: string, docId: string, filePath: string) {
+    const timestamp = this.timestamp;
+    const docRef = this._afs.collection(this.getCollUrls(coll)).doc(docId);
+    return docRef.update({
+      files: firestore.FieldValue.arrayUnion(filePath),
+      updatedAt: timestamp,
+      // username: this.afAuth.auth.currentUser.displayName,
+      // useremail: this.afAuth.auth.currentUser.email,
+      // author: this.afAuth.auth.currentUser.uid
+    });
+  }
+  getFileDownloadUrl(url) {
+    const ref = this._storage.ref(url);
+    return ref.getDownloadURL();
+  }
+  setRole(role) {
+    this.userRoleSource.next(role);
   }
 }

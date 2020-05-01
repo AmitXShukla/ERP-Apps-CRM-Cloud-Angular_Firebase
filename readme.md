@@ -10,36 +10,41 @@ Make an App for existing Oracle, PeopleSoft, SAP, or Siebel CRM or old custom so
 <b>Community Version</b> - All apps are Free download with complete source code for iOS, Android and web.<br>
 <a href="https://www.youtube.com/playlist?list=PLp0TENYyY8lHNMTAlrfVQKzAvQo3yzHYk">Click here for Video Tutorials !</a>
 <br/>
-<h2>Installation Instructions</h2>
-<h4>Step 1: Install your favorite Code editor</h4>
+``` ts
+Installation Instructions
+Step 1: Install your favorite Code editor
 Anroid Studio, IntelliJ community edition, Visual Studio Code
-<h4>Step 2: download node js </h4>
-make sure, your windows, linux or mac environment path is setup to the directory where your node.exe file is<br>
-for example<br>
-Path  = c:\amit.la\Program\node<br><br>
-now run following commands in terminal window<br>
-$ node -v<br>
-$ npm -v<br><br>
-make sure both the these commands return a valid node and npm version.<br><br>
-now install angular cli<br>
-$ npm install -g @angular/cli<br>
-// after installation<br>
-$ ng version<br>
-make sure ng version returns a valid Angular cli version.<br><br>
-<h4>Step 3: download this GitHub repository - Fork/Download Zip </h4>
-extract all files to your c drive and browse to the directory where you can see package.json<br>
-$ npm install --save<br>
-make sure installation finished without any error<br>
-$ ng serve --open<br>
-at this point, your app will serve on localhost:4200 but it show some errors because your firebase in not setup yet<br>
-<h4>Step 4: Setup Firebase project </h4>
-go to -> console.firebase.com<br>
-set up a new project<br>
+
+Step 2: download node js
+make sure, your windows, linux or mac environment path is setup to the directory where your node.exe file is
+for example
+
+Path  = c:\amit.la\Program\node
+now run following commands in terminal window
+$ node -v
+$ npm -v
+make sure both the these commands return a valid node and npm version.
+now install angular cli
+$ npm install -g @angular/cli
+// after installation
+$ ng version
+make sure ng version returns a valid Angular cli version.
+
+Step 3: download this GitHub repository - Fork/Download Zip 
+extract all files to your c drive and browse to the directory where you can see package.json
+$ npm install --save
+make sure installation finished without any error
+$ ng serve --open
+at this point, your app will serve on localhost:4200 but it show some errors because your firebase in not setup yet
+
+Step 4: Setup Firebase project 
+go to -> console.firebase.com
+set up a new project
 inside your project, click on authentication and enable
-email/password, Google and Facebook authentication methods<br><br>
-now setup Firebase rules<br>
-please copy paste these rules as-is and make sure, there are no errors anywhere.<br><br>
-    
+email/password, Google and Facebook authentication methods
+now setup Firebase rules
+please copy paste these rules as-is and make sure, there are no errors anywhere.
+```
     
     rules_version = '2';
     service cloud.firestore {
@@ -93,38 +98,53 @@ please copy paste these rules as-is and make sure, there are no errors anywhere.
     }
     }
 
-<br/><br/>
-<h4>Step 5: Create new data collection</h4>
-as shown in this screen and make sure all documents/fields look exactly the same.<br/>
+```ts
+Step 5: Create new data collection
+as shown in this screen and make sure all documents/fields look exactly the same.
+```
+
 <a href="https://www.youtube.com/playlist?list=PLp0TENYyY8lHNMTAlrfVQKzAvQo3yzHYk">YouTube video Part -1 @ 13:08</a>
-<br/><br/>
-USER_ROLES is a collection<br/>
-admin is a document inside it<br/>
-admin, addressbook etc each has a “map” inside<br/>
-Which has four fields each<br/>
-visible Boolean true<br/>
-read Boolean true<br/>
-write Boolean true<br/>
-delete Boolean true<br/>
-<h4>Step 6: find Firebase Project settings</h4>
-copy and replace Firebase settings in your app->environments/environment.ts and environment.prod.ts<br/>
+```ts
+USER_ROLES is a collection
+admin is a document inside it
+admin, addressbook etc each has a “map” inside
+Which has four fields each
+visible Boolean true
+read Boolean true
+write Boolean true
+delete Boolean true
 
-<h4>Step 7: Browse App </h4>
-your app should be up and running now if not, please open browser console and look for errors.<br>
-if firebase is not setup properly or settings are not copies correctly, you will see error like invalid API Key.<br><br>
-If you see any error please open a new issue and include a screen shot of your terminal and browser console window.
+Step 6: find Firebase Project settings
+copy and replace Firebase settings in your app->environments/environment.ts and environment.prod.ts
 
+
+Step 7: Browse App 
+to check if your app is up and running now if not, please open browser console and look for errors
+
+if firebase is not setup properly or settings are not copies correctly, you will see error like invalid API Key.
+
+For any other error please open a new issue and include a screen shot of your terminal and browser console window.
+```
+Work in progress<br/>
 # Pro - ERP
-HCM<br/>
-CRM<br/>
-SCM<br/>
-CRM, Supply Chain,<br/>
-Live Inventory<br/>
-Book Keeping<br/>
+
+Other Apps -> CRM Cloud<br/>
+  Marketting<br/>
+  Helpdesk<br/>
+  BPO/Call Register<br/>
+  Customer Order Fullfillment<br/><br/>
+Supply Chain<br/>
+  Buy To Pay<br/>
+  Customer Order Fullfillment<br/>
+  Sales<br/>
+  Live Inventory<br/><br/>
+Finance<br/>
+  Book Keeping<br/>
+  Accounts Payable<br/>
+  Accounts Receivable<br/>
 Expense Management<br/>
 Assets management<br/>
-<br/>
-Other Apps -> CRM App<br/>
+
 Other Apps -> HCM Employee Management App<br/>
 Other Apps -> Supply Chain App<br/>
 Other Apps -> Inventory Management App<br/>
@@ -142,6 +162,7 @@ Other Apps -> Expense Management<br/>
 Other Apps -> Assets management<br/>
 Other Apps -> Warehouse Management App<br/>
 --------------------
+
 Supply Chain & Inventory Management App (Redux or RxJs and/or React version)<br/><br/>
 >> Setup<br/>
 Org/Company<br/>

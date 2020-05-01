@@ -1,45 +1,72 @@
 <mat-toolbar color="none">
-    <mat-toolbar-row>
-        <button mat-mini-fab color="warn"  [matMenuTriggerFor]="rootMenu">
-            <mat-icon>menu</mat-icon>
-          </button>
-          <mat-menu #rootMenu="matMenu">
-              <div mat-subheader>
-                  <button mat-menu-item routerLink="/aboutus">
-                    <mat-icon class="circle-link example-icon-link">bookmark</mat-icon>About Us
-                  </button>
-                </div>
-            <div mat-subheader *ngIf="(data$ | async)?.addressbook.visible">
-              <button mat-menu-item>
-                <mat-icon class="circle-link example-icon-link">book</mat-icon>Address Book
-              </button>
-            </div>
-            <div mat-subheader *ngIf="(data$ | async)?.admin.visible">
-                <mat-divider></mat-divider>
-                <button mat-menu-item routerLink="/admin">
-                  <mat-icon class="circle-link example-icon-link">group</mat-icon>Admin
-                </button>
-              </div>
-          </mat-menu>
-      <mat-icon class="example-icon">{{ imageUrl }}</mat-icon>
-      <span matTooltip="About us">{{ pageTitle }}</span><span class="example-spacer"></span>
-      <span matTooltip="Update Settings"><button mat-icon-button routerLink="/settings">
-          <mat-icon>settings</mat-icon>
-        </button></span>
-      <span matTooltip="Help" [matMenuTriggerFor]="helpMenu">
-        <button mat-icon-button>
-          <mat-icon>help</mat-icon>
+  <mat-toolbar-row>
+    <button mat-mini-fab color="warn" [matMenuTriggerFor]="rootMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #rootMenu="matMenu">
+      <div mat-subheader>
+        <button mat-menu-item routerLink="/aboutus">
+          <mat-icon class="circle-link example-icon-link">bookmark</mat-icon>About Us
         </button>
-      </span>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <mat-menu #helpMenu="matMenu">
-    {{ helpType == "login" ? configData.login : ""}}
-    {{ helpType == "register" ? configData.register : ""}}
-    {{ helpType == "checkin" ? configData.checkin : ""}}
-    {{ helpType == "checkout" ? configData.checkout : ""}}
-    {{ helpType == "aboutus" ? configData.aboutus : ""}}
-    {{ helpType == "employee" ? configData.employee : ""}}
+      </div>
+      <div mat-subheader *ngIf="(data$ | async)?.addressbook.visible">
+        <button mat-menu-item routerLink="/addressbook">
+          <mat-icon class="circle-link example-icon-link">import_contacts</mat-icon>Address Book
+        </button>
+      </div>
+      <!-- <div mat-subheader *ngIf="(data$ | async)?.addressbook.visible">
+        <button mat-menu-item [matMenuTriggerFor]="crmMenu">
+          <mat-icon class="circle-link example-icon-link">cloud</mat-icon>CRM
+        </button>
+      </div> -->
+      <div mat-subheader *ngIf="(data$ | async)?.admin.visible">
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="/admin">
+          <mat-icon class="circle-link example-icon-link">group</mat-icon>Admin
+        </button>
+      </div>
+    </mat-menu>
+    <mat-icon class="example-icon">{{ imageUrl }}</mat-icon>
+    <span matTooltip="About us">{{ pageTitle }}</span><span class="example-spacer"></span>
+    <span matTooltip="Update Settings"><button mat-icon-button routerLink="/settings">
+        <mat-icon>settings</mat-icon>
+      </button></span>
+    <span matTooltip="Help" [matMenuTriggerFor]="helpMenu">
+      <button mat-icon-button>
+        <mat-icon>help</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-menu #helpMenu="matMenu">
+  {{ helpType == "login" ? configData.login : ""}}
+  {{ helpType == "register" ? configData.register : ""}}
+  {{ helpType == "checkin" ? configData.checkin : ""}}
+  {{ helpType == "checkout" ? configData.checkout : ""}}
+  {{ helpType == "aboutus" ? configData.aboutus : ""}}
+  {{ helpType == "employee" ? configData.employee : ""}}
 
-  </mat-menu>
-  
+</mat-menu>
+
+<mat-menu #crmMenu="matMenu">
+  <div mat-subheader>
+    <button mat-menu-item routerLink="/campaign">
+      Campaign
+    </button>
+  </div>
+  <div mat-subheader>
+    <button mat-menu-item routerLink="/lead">
+      Lead
+    </button>
+  </div>
+  <div mat-subheader>
+    <button mat-menu-item routerLink="/oppurtunity">
+      Oppurtunity
+    </button>
+  </div>
+  <div mat-subheader>
+    <button mat-menu-item routerLink="/expense">
+      Expense
+    </button>
+  </div>
+</mat-menu>
