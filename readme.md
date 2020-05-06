@@ -173,15 +173,7 @@ Order Fullfillment App<br/>
 Expense Management<br/>
 Assets management<br/>
 Warehouse Management App<br/>
---------------------
 
-Supply Chain & Inventory Management App (Redux or RxJs and/or React version)<br/><br/>
->> Setup<br/>
-Org/Company<br/>
-Vendor / Mfg<br/>
-Customer<br/>
-<br/>
->> Register<br/>
 Requisition -> Generate Req and auto PO<br/>
 PO  -> Request Inventory<br/>
 Receipt -> Receive Inventory<br/>
