@@ -1,4 +1,4 @@
-# Please give a Star * to this repository if you like this project.
+# Please give a <b>Star *</b> to this repository if you like this project.
 # ERP-Apps
 # Objective
 Build ERP apps for Small, Medium and Large Organizations<br/>
@@ -68,6 +68,24 @@ please copy paste these rules as-is and make sure, there are no errors anywhere.
     allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
     allow delete: if isAdmin();
     }
+    match /USER_CAMPAIGN/{document=**} {
+    allow read: if (isSignedIn() && isEmployee()) || isAdmin();
+    allow create: if isSignedIn();
+    allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow delete: if isAdmin();
+    }
+    match /USER_LEADS/{document=**} {
+    allow read: if (isSignedIn() && isEmployee()) || isAdmin();
+    allow create: if isSignedIn();
+    allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow delete: if isAdmin();
+    }
+    match /USER_OPPURTUNITY/{document=**} {
+    allow read: if (isSignedIn() && isEmployee()) || isAdmin();
+    allow create: if isSignedIn();
+    allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow delete: if isAdmin();
+    }
     // helper functions
     function isSignedIn() {
     return request.auth.uid != null;
@@ -97,6 +115,8 @@ as shown in this screen and make sure all documents/fields look exactly the same
 ```
 
 <a href="https://www.youtube.com/playlist?list=PLp0TENYyY8lHNMTAlrfVQKzAvQo3yzHYk">YouTube video Part -1 @ 13:08</a>
+<img src="https://user-images.githubusercontent.com/20031132/79258144-8f462600-7e3f-11ea-8d32-ee39026c015f.png">
+<img src="https://user-images.githubusercontent.com/20031132/79186856-a0efe500-7dcf-11ea-998c-890b58fd28e9.png">
 ```ts
 USER_ROLES is a collection
 admin is a document inside it
@@ -118,8 +138,7 @@ if firebase is not setup properly or settings are not copies correctly, you will
 
 For any other error please open a new issue and include a screen shot of your terminal and browser console window.
 ```
-Work in progress<br/>
-# Pro - ERP
+## Pro Version Enquiries info@elishconsulting.com - ERP
 
 Other Apps -> CRM Cloud<br/>
   Marketting<br/>
@@ -138,22 +157,22 @@ Finance<br/>
 Expense Management<br/>
 Assets management<br/>
 
-Other Apps -> HCM Employee Management App<br/>
-Other Apps -> Supply Chain App<br/>
-Other Apps -> Inventory Management App<br/>
-Other Apps -> Book Keeping App<br/>
-Other Apps -> Buy to Pay B2P App<br/>
-Other Apps -> Accounts Payables App<br/>
-Other Apps -> Accounts Receivables App<br/>
-Other Apps -> Vendor Management App<br/>
-Other Apps -> Help Desk App<br/>
-Other Apps -> Call Center App<br/>
-Other Apps -> Order Fullfillment App<br/>
-Other Apps -> Product Catalogue<br/>
-Other Apps -> Order Fullfillment App<br/>
-Other Apps -> Expense Management<br/>
-Other Apps -> Assets management<br/>
-Other Apps -> Warehouse Management App<br/>
+HCM Employee Management App<br/>
+Supply Chain App<br/>
+Inventory Management App<br/>
+Book Keeping App<br/>
+Buy to Pay B2P App<br/>
+Accounts Payables App<br/>
+Accounts Receivables App<br/>
+Vendor Management App<br/>
+Help Desk App<br/>
+Call Center App<br/>
+Order Fullfillment App<br/>
+Product Catalogue<br/>
+Order Fullfillment App<br/>
+Expense Management<br/>
+Assets management<br/>
+Warehouse Management App<br/>
 --------------------
 
 Supply Chain & Inventory Management App (Redux or RxJs and/or React version)<br/><br/>

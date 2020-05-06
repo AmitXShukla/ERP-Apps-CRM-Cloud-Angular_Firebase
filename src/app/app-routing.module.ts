@@ -11,7 +11,6 @@ import { AddressComponent } from './ui/addressbook/address.component';
 import { CampaignComponent } from './ui/market/campaign.component';
 import { LeadComponent } from './ui/market/lead.component';
 import { OppurtunityComponent } from './ui/market/oppurtunity.component';
-import { ExpensesComponent } from './ui/market/expenses.component';
 
 // firebase auth guard]
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
@@ -35,7 +34,6 @@ const routes: Routes = [
   { path: 'campaign', component: CampaignComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'lead', component: LeadComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'oppurtunity', component: OppurtunityComponent, ...canActivate(redirectUnauthorizedToLogin) },
-  { path: 'expense', component: ExpensesComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 

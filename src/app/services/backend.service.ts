@@ -42,6 +42,9 @@ return this.afAuth.signInWithEmailAndPassword(formData.data.email, formData.data
     if (coll == "USERS") { _coll = "USER_SETTINGS"; }
     if (coll == "ROLES") { _coll = "USER_ROLES"; }
     if (coll == "ADDRESSBOOK") { _coll = "USER_ADDRESSBOOK"; }
+    if (coll == "CAMPAIGN") { _coll = "USER_CAMPAIGN"; }
+    if (coll == "LEADS") { _coll = "USER_LEADS"; }
+    if (coll == "OPPURTUNITY") { _coll = "USER_OPPURTUNITY"; }
     return _coll;
   }
 

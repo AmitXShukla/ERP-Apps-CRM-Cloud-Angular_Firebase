@@ -18,7 +18,6 @@ import { AddressComponent } from './ui/addressbook/address.component';
 import { CampaignComponent } from './ui/market/campaign.component';
 import { LeadComponent } from './ui/market/lead.component';
 import { OppurtunityComponent } from './ui/market/oppurtunity.component';
-import { ExpensesComponent } from './ui/market/expenses.component';
 
 // material imports
 import { HttpClientModule } from '@angular/common/http';
@@ -52,6 +51,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 // Angular fire imports
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
@@ -86,7 +86,6 @@ import { BookkeepingComponent } from './ui/bookkeeping/bookkeeping.component';
     CampaignComponent,
     LeadComponent,
     OppurtunityComponent,
-    ExpensesComponent,
     WarehouseComponent,
     BuytopayComponent,
     ReceivableComponent,
@@ -129,6 +128,7 @@ import { BookkeepingComponent } from './ui/bookkeeping/bookkeeping.component';
     MatPaginatorModule,
     MatSlideToggleModule,
     MatSidenavModule,
+    MatDatepickerModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule

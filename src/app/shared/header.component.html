@@ -14,6 +14,11 @@
           <mat-icon class="circle-link example-icon-link">import_contacts</mat-icon>Address Book
         </button>
       </div>
+      <div mat-subheader *ngIf="(data$ | async)?.addressbook.visible">
+        <button mat-menu-item [matMenuTriggerFor]="mktMenu">
+          <mat-icon class="circle-link example-icon-link">business</mat-icon>Marketing
+        </button>
+      </div>
       <!-- <div mat-subheader *ngIf="(data$ | async)?.addressbook.visible">
         <button mat-menu-item [matMenuTriggerFor]="crmMenu">
           <mat-icon class="circle-link example-icon-link">cloud</mat-icon>CRM
@@ -45,8 +50,28 @@
   {{ helpType == "checkout" ? configData.checkout : ""}}
   {{ helpType == "aboutus" ? configData.aboutus : ""}}
   {{ helpType == "employee" ? configData.employee : ""}}
-
 </mat-menu>
+<mat-menu #mktMenu="matMenu">
+  <div mat-subheader>
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="/campaign">
+      <mat-icon class="circle-link example-icon-link">business</mat-icon>Campaign
+    </button>
+  </div>
+  <div mat-subheader>
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="/lead">
+      <mat-icon class="circle-link example-icon-link">business</mat-icon>Leads
+    </button>
+  </div>
+  <div mat-subheader>
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="/oppurtunity">
+      <mat-icon class="circle-link example-icon-link">business</mat-icon>Oppurtunities
+    </button>
+  </div>
+</mat-menu>
+
 
 <mat-menu #crmMenu="matMenu">
   <div mat-subheader>
