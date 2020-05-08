@@ -17,7 +17,7 @@ import { AddressComponent } from './ui/addressbook/address.component';
 // CRM Cloud
 import { CampaignComponent } from './ui/market/campaign.component';
 import { LeadComponent } from './ui/market/lead.component';
-import { OppurtunityComponent } from './ui/market/oppurtunity.component';
+import { OpportunityComponent } from './ui/market/opportunity.component';
 
 // material imports
 import { HttpClientModule } from '@angular/common/http';
@@ -63,10 +63,6 @@ import { HeaderComponent } from './shared/header.component';
 import { FileUploadComponent } from './shared/dropzone/fileupload.component';
 import { DropZoneDirective } from './shared/dropzone/dropzone.directive';
 import { FileSizePipe } from './shared/dropzone/filesize.pipe';
-import { WarehouseComponent } from './ui/warehouse/warehouse.component';
-import { BuytopayComponent } from './ui/buytopay/buytopay.component';
-import { ReceivableComponent } from './ui/receivable/receivable.component';
-import { BookkeepingComponent } from './ui/bookkeeping/bookkeeping.component';
 
 @NgModule({
   declarations: [
@@ -85,11 +81,7 @@ import { BookkeepingComponent } from './ui/bookkeeping/bookkeeping.component';
     FileSizePipe,
     CampaignComponent,
     LeadComponent,
-    OppurtunityComponent,
-    WarehouseComponent,
-    BuytopayComponent,
-    ReceivableComponent,
-    BookkeepingComponent
+    OpportunityComponent
   ],
   imports: [
     BrowserModule,

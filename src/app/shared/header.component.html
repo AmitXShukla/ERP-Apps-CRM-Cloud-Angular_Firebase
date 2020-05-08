@@ -19,6 +19,11 @@
           <mat-icon class="circle-link example-icon-link">business</mat-icon>Marketing
         </button>
       </div>
+      <div mat-subheader *ngIf="(data$ | async)?.addressbook.visible">
+        <button mat-menu-item [matMenuTriggerFor]="bpoMenu">
+          <mat-icon class="circle-link example-icon-link">sms</mat-icon>BPO call center
+        </button>
+      </div>
       <!-- <div mat-subheader *ngIf="(data$ | async)?.addressbook.visible">
         <button mat-menu-item [matMenuTriggerFor]="crmMenu">
           <mat-icon class="circle-link example-icon-link">cloud</mat-icon>CRM
@@ -66,32 +71,40 @@
   </div>
   <div mat-subheader>
     <mat-divider></mat-divider>
-    <button mat-menu-item routerLink="/oppurtunity">
+    <button mat-menu-item routerLink="/opportunity">
       <mat-icon class="circle-link example-icon-link">business</mat-icon>Oppurtunities
     </button>
   </div>
 </mat-menu>
-
-
-<mat-menu #crmMenu="matMenu">
+<mat-menu #bpoMenu="matMenu">
   <div mat-subheader>
+    <mat-divider></mat-divider>
     <button mat-menu-item routerLink="/campaign">
-      Campaign
+      Appointments
     </button>
   </div>
   <div mat-subheader>
+    <mat-divider></mat-divider>
     <button mat-menu-item routerLink="/lead">
-      Lead
+      Calls, emails, Enquiries
     </button>
   </div>
   <div mat-subheader>
-    <button mat-menu-item routerLink="/oppurtunity">
-      Oppurtunity
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="/opportunity">
+      Helpdesk Service Tickets
     </button>
   </div>
   <div mat-subheader>
-    <button mat-menu-item routerLink="/expense">
-      Expense
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="/opportunity">
+      Work Orders
+    </button>
+  </div>
+  <div mat-subheader>
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="/opportunity">
+      Order Fulfilllment
     </button>
   </div>
 </mat-menu>

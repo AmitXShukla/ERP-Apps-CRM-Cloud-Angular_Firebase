@@ -11,13 +11,13 @@ import { BackendService } from '../../services/backend.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-oppurtunity',
-  templateUrl: './oppurtunity.component.html',
-  styleUrls: ['./oppurtunity.component.css'],
+  selector: 'app-opportunity',
+  templateUrl: './opportunity.component.html',
+  styleUrls: ['./opportunity.component.css'],
   animations: [moveIn(), fallIn()],
   host: { '[@moveIn]': '' }
 })
-export class OppurtunityComponent implements OnInit, OnDestroy {
+export class OpportunityComponent implements OnInit, OnDestroy {
   panelOpenState = false;
   contacts = ['Personal', 'Customer', 'Manufacturer', 'Vendor', 'Other', 'Campaign', 'Lead', 'Oppurtunity'];
   addTypes = ['Home', 'Office', 'Primary', 'Mailing'];

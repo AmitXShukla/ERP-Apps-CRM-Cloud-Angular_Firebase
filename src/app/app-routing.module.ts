@@ -10,7 +10,7 @@ import { AddressComponent } from './ui/addressbook/address.component';
 // CRM Cloud
 import { CampaignComponent } from './ui/market/campaign.component';
 import { LeadComponent } from './ui/market/lead.component';
-import { OppurtunityComponent } from './ui/market/oppurtunity.component';
+import { OpportunityComponent } from './ui/market/opportunity.component';
 
 // firebase auth guard]
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'campaign', component: CampaignComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'lead', component: LeadComponent, ...canActivate(redirectUnauthorizedToLogin) },
-  { path: 'oppurtunity', component: OppurtunityComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'opportunity', component: OpportunityComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
