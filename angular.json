@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angularUI": {
+    "testapp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,18 +13,17 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angularUI",
+            "outputPath": "dist/testapp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/assets/icons/favicon.ico",
+              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/custom-theme.scss",
               "src/assets/css/styles.css"
             ],
             "scripts": []
@@ -63,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angularUI:build"
+            "browserTarget": "testapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angularUI:build:production"
+              "browserTarget": "testapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angularUI:build"
+            "browserTarget": "testapp:build"
           }
         },
         "test": {
@@ -111,20 +110,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angularUI:serve"
+            "devServerTarget": "testapp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angularUI:serve:production"
+              "devServerTarget": "testapp:serve:production"
             }
           }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {}
         }
       }
-    }
-  },
-  "defaultProject": "angularUI"
+    }},
+  "defaultProject": "testapp"
 }
