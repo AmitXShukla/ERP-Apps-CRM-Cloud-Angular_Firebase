@@ -86,6 +86,36 @@ please copy paste these rules as-is and make sure, there are no errors anywhere.
     allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
     allow delete: if isAdmin();
     }
+    match /USER_APPOINTMENTS/{document=**} {
+    allow read: if (isSignedIn() && isEmployee()) || isAdmin();
+    allow create: if isSignedIn();
+    allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow delete: if isAdmin();
+    }
+    match /USER_CALLS/{document=**} {
+    allow read: if (isSignedIn() && isEmployee()) || isAdmin();
+    allow create: if isSignedIn();
+    allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow delete: if isAdmin();
+    }
+    match /USER_TICKETS/{document=**} {
+    allow read: if (isSignedIn() && isEmployee()) || isAdmin();
+    allow create: if isSignedIn();
+    allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow delete: if isAdmin();
+    }
+    match /USER_WORKORDERS/{document=**} {
+    allow read: if (isSignedIn() && isEmployee()) || isAdmin();
+    allow create: if isSignedIn();
+    allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow delete: if isAdmin();
+    }
+    match /USER_ORDERS/{document=**} {
+    allow read: if (isSignedIn() && isEmployee()) || isAdmin();
+    allow create: if isSignedIn();
+    allow update: if (isSignedIn() && isDocOwner()) || isAdmin();
+    allow delete: if isAdmin();
+    }
     // helper functions
     function isSignedIn() {
     return request.auth.uid != null;

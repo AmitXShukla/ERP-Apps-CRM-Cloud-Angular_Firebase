@@ -1,4 +1,4 @@
-<app-header pageTitle="Enquiries" imageUrl="sms" helpType="enquiry"></app-header>
+<app-header pageTitle="Order" imageUrl="sms" helpType="crm"></app-header>
 <mat-card [@fallIn]='state'>
     <mat-card-content>
         <div *ngIf="(toggleField=='searchMode') 
@@ -7,7 +7,7 @@
             <form #searchFormData="ngForm" class="example-form">
                 <mat-card-actions align="start">
                     <button type="button" (click)="toggle('resMode');getData(searchFormData.value);" mat-raised-button
-                        [disabled]="(name.value == '' && phone.value == '') || !searchFormData.valid"
+                        [disabled]="(name.value == '' && campaignID.value == '') || !searchFormData.valid"
                         color="primary">Search</button>
                     <span class="med-spacer"></span>
                     <span matTooltip="add new contact">
@@ -19,17 +19,17 @@
                     </span>
                 </mat-card-actions>
                 <mat-form-field class="example-form">
-                    <input matInput type="text" placeholder="Contact Name" id="name" name="name" #name="ngModel" ngModel
-                        [disabled]="phone.value !== ''">
+                    <input matInput type="text" placeholder="Order Name" id="name" name="name" #name="ngModel" ngModel
+                        [disabled]="campaignID.value !== ''">
                 </mat-form-field>
-                <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">Please enter a valid name.</mat-error>
+                <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">Please enter a valid Order.</mat-error>
                 <br>
                 <mat-form-field class="example-form">
-                    <input matInput type="text" placeholder="Phone #" id="phone" name="phone" #phone="ngModel" ngModel
-                        [disabled]="name.value !== ''" pattern="^[a-z0-9_-]{8,15}$">
+                    <input matInput type="text" placeholder="Order #" id="campaignID" name="campaignID"
+                        #campaignID="ngModel" ngModel [disabled]="name.value !== ''" pattern="^[a-z0-9_-]{8,15}$">
                 </mat-form-field>
-                <mat-error *ngIf="phone.invalid && (phone.dirty || phone.touched)">Please enter a valid phone #.
-                </mat-error>
+                <mat-error *ngIf="campaignID.invalid && (campaignID.dirty || campaignID.touched)">Please enter a valid
+                    Order #.</mat-error>
             </form>
         </div>
     </mat-card-content>
@@ -47,7 +47,7 @@
             <mat-error *ngIf="error">Error: {{ errorMessage }}</mat-error>
             <mat-card-actions align="start">
                 <button type="submit" mat-raised-button color="primary" [disabled]="!addDataForm.valid">New
-                    Enquiry</button>
+                    Order</button>
                 <button type="reset" (click)="this.addDataForm.reset();" mat-raised-button
                     [disabled]="!addDataForm.valid" color="primary">Clear</button>
                 <span class="med-spacer"></span>
@@ -63,12 +63,27 @@
                 <input matInput placeholder="Name" formControlName="name" required>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Phone #" formControlName="phone" required>
+                <input matInput placeholder="Order ID #" formControlName="campaignID" required>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Contact Type</mat-label>
-                <mat-select formControlName="contacttype">
+                <mat-select formControlName="campaignType">
                     <mat-option *ngFor="let c of contacts" [value]="c">
+                        {{ c }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <input matInput type="date" placeholder="Start Date" formControlName="startDt" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="date" placeholder="End Date" formControlName="endDt" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option *ngFor="let c of statuses" [value]="c">
                         {{ c }}
                     </mat-option>
                 </mat-select>
@@ -76,7 +91,7 @@
             <br />
             <mat-form-field class="example-full-width">
                 <mat-label>Leave a comment</mat-label>
-                <textarea matInput placeholder="Ex. Purpose of enquiry..." formControlName="purpose"></textarea>
+                <textarea matInput placeholder="Ex. Purpose of Order..." formControlName="purpose"></textarea>
             </mat-form-field>
             <mat-accordion>
                 <mat-expansion-panel>
@@ -101,65 +116,71 @@
                             <mat-form-field>
                                 <input matInput placeholder="Full Address" formControlName="address">
                             </mat-form-field>
-                            <mat-icon color="warn" (click)="deleteAddress(pointIndex,'addDataForm')">delete</mat-icon>
+                            <mat-icon color="warn" *ngIf="(userRole$ | async)?.addressbook.delete"
+                                (click)="deleteAddress(pointIndex,'addDataForm')">delete</mat-icon>
                         </div>
-                        <mat-icon color="primary" (click)="addAddress('addDataForm')">add</mat-icon>
+                        <mat-icon color="primary" *ngIf="(userRole$ | async)?.addressbook.delete"
+                            (click)="addAddress('addDataForm')">add</mat-icon>
                     </div>
                 </mat-expansion-panel>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            email IDs
+                            Assignments
                         </mat-panel-title>
                         <mat-panel-description>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
 
-                    <div formArrayName="emails">
-                        <div *ngFor="let item of addDataForm.get('emails')?.controls; let pointIndex=index"
+                    <div formArrayName="assigned">
+                        <div *ngFor="let item of addDataForm.get('assigned')?.controls; let pointIndex=index"
                             [formGroupName]="pointIndex">
                             <mat-form-field>
-                                <mat-label>eMail Type</mat-label>
-                                <mat-select formControlName="emailtype">
-                                    <mat-option *ngFor="let a of emailTypes" [value]="a">
+                                <mat-label>Assigned To</mat-label>
+                                <mat-select formControlName="assignedtype">
+                                    <mat-option *ngFor="let a of assignedTypes" [value]="a">
                                         {{ a }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field>
-                                <input matInput placeholder="email ID" formControlName="email">
+                                <input matInput placeholder="Assigned to" formControlName="assigned">
                             </mat-form-field>
-                            <mat-icon color="warn" (click)="deleteEmail(pointIndex,'addDataForm')">delete</mat-icon>
+                            <mat-icon color="warn" *ngIf="(userRole$ | async)?.addressbook.delete"
+                                (click)="deleteAssigned(pointIndex,'addDataForm')">delete</mat-icon>
                         </div>
-                        <mat-icon color="primary" (click)="addEmail('addDataForm')">add</mat-icon>
+                        <mat-icon color="primary" *ngIf="(userRole$ | async)?.addressbook.delete"
+                            (click)="addAssigned('addDataForm')">add</mat-icon>
                     </div>
 
                 </mat-expansion-panel>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Phone #s
+                            Expenses
                         </mat-panel-title>
                         <mat-panel-description>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <div formArrayName="phones">
-                        <div *ngFor="let item of addDataForm.get('phones')?.controls; let pointIndex=index"
+                    <div formArrayName="expenses">
+                        <div *ngFor="let item of addDataForm.get('expenses')?.controls; let pointIndex=index"
                             [formGroupName]="pointIndex">
                             <mat-form-field>
-                                <mat-label>Phone Type</mat-label>
-                                <mat-select formControlName="phonetype">
-                                    <mat-option *ngFor="let a of phoneTypes" [value]="a">
+                                <mat-label>Expense Type</mat-label>
+                                <mat-select formControlName="expensestype">
+                                    <mat-option *ngFor="let a of expenseTypes" [value]="a">
                                         {{ a }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field>
-                                <input matInput placeholder="Phone #" formControlName="phone">
+                                <input matInput placeholder="Expenses" formControlName="expenses">
                             </mat-form-field>
-                            <mat-icon color="warn" (click)="deletePhone(pointIndex,'addDataForm')">delete</mat-icon>
+                            <mat-icon color="warn" *ngIf="(userRole$ | async)?.addressbook.delete"
+                                (click)="deleteExpenses(pointIndex,'addDataForm')">delete</mat-icon>
                         </div>
-                        <mat-icon color="primary" (click)="addPhone('addDataForm')">add</mat-icon>
+                        <mat-icon color="primary" *ngIf="(userRole$ | async)?.addressbook.delete"
+                            (click)="addExpenses('addDataForm')">add</mat-icon>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -194,12 +215,28 @@
                 <input matInput placeholder="Name" formControlName="name" required>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Phone #" formControlName="phone" required>
+                <input matInput placeholder="Order ID #" formControlName="campaignID" required>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Contact Type</mat-label>
-                <mat-select formControlName="contacttype">
+                <mat-select formControlName="campaignType">
                     <mat-option *ngFor="let c of contacts" [value]="c">
+                        {{ c }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Start Date</mat-label>
+                <input matInput type="date" formControlName="startDt" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="date" placeholder="End Date" formControlName="endDt" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option *ngFor="let c of statuses" [value]="c">
                         {{ c }}
                     </mat-option>
                 </mat-select>
@@ -207,7 +244,7 @@
             <br />
             <mat-form-field class="example-full-width">
                 <mat-label>Leave a comment</mat-label>
-                <textarea matInput placeholder="Ex. Purpose of enquiry..." formControlName="purpose"></textarea>
+                <textarea matInput placeholder="Ex. Purpose of Order..." formControlName="purpose"></textarea>
             </mat-form-field>
             <mat-accordion>
                 <mat-expansion-panel>
@@ -242,61 +279,61 @@
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            email IDs
+                            Assignments
                         </mat-panel-title>
                         <mat-panel-description>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
 
-                    <div formArrayName="emails">
-                        <div *ngFor="let item of editDataForm.get('emails')?.controls; let pointIndex=index"
+                    <div formArrayName="assigned">
+                        <div *ngFor="let item of editDataForm.get('assigned')?.controls; let pointIndex=index"
                             [formGroupName]="pointIndex">
                             <mat-form-field>
-                                <mat-label>eMail Type</mat-label>
-                                <mat-select formControlName="emailtype">
-                                    <mat-option *ngFor="let a of emailTypes" [value]="a">
+                                <mat-label>Assigned To</mat-label>
+                                <mat-select formControlName="assignedtype">
+                                    <mat-option *ngFor="let a of assignedTypes" [value]="a">
                                         {{ a }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field>
-                                <input matInput placeholder="email ID" formControlName="email">
+                                <input matInput placeholder="Assigned to" formControlName="assigned">
                             </mat-form-field>
                             <mat-icon color="warn" *ngIf="(userRole$ | async)?.addressbook.delete"
-                                (click)="deleteEmail(pointIndex,'editDataForm')">delete</mat-icon>
+                                (click)="deleteAssigned(pointIndex,'editDataForm')">delete</mat-icon>
                         </div>
                         <mat-icon color="primary" *ngIf="(userRole$ | async)?.addressbook.delete"
-                            (click)="addEmail('editDataForm')">add</mat-icon>
+                            (click)="addAssigned('editDataForm')">add</mat-icon>
                     </div>
 
                 </mat-expansion-panel>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Phone #s
+                            Expenses
                         </mat-panel-title>
                         <mat-panel-description>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <div formArrayName="phones">
-                        <div *ngFor="let item of editDataForm.get('phones')?.controls; let pointIndex=index"
+                    <div formArrayName="expenses">
+                        <div *ngFor="let item of editDataForm.get('expenses')?.controls; let pointIndex=index"
                             [formGroupName]="pointIndex">
                             <mat-form-field>
-                                <mat-label>Phone Type</mat-label>
-                                <mat-select formControlName="phonetype">
-                                    <mat-option *ngFor="let a of phoneTypes" [value]="a">
+                                <mat-label>Expense Type</mat-label>
+                                <mat-select formControlName="expensestype">
+                                    <mat-option *ngFor="let a of expenseTypes" [value]="a">
                                         {{ a }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field>
-                                <input matInput placeholder="Phone #" formControlName="phone">
+                                <input matInput placeholder="Expenses" formControlName="expenses">
                             </mat-form-field>
                             <mat-icon color="warn" *ngIf="(userRole$ | async)?.addressbook.delete"
-                                (click)="deletePhone(pointIndex,'editDataForm')">delete</mat-icon>
+                                (click)="deleteExpenses(pointIndex,'editDataForm')">delete</mat-icon>
                         </div>
                         <mat-icon color="primary" *ngIf="(userRole$ | async)?.addressbook.delete"
-                            (click)="addPhone('editDataForm')">add</mat-icon>
+                            (click)="addExpenses('editDataForm')">add</mat-icon>
                     </div>
                 </mat-expansion-panel>
                 <mat-expansion-panel>
@@ -329,7 +366,7 @@
                             </mat-icon>
                         </span>
                         <br />
-                        <app-fileupload fileUrl="CALLS" docId="{{docId}}"></app-fileupload>
+                        <app-fileupload fileUrl="ORDER" docId="{{docId}}"></app-fileupload>
                     </div>
                     <br>
                     <button type="button" mat-raised-button *ngIf="(userRole$ | async)?.addressbook.delete"
@@ -345,7 +382,7 @@
         <span class="med-spacer"></span>
         <span class="med-spacer"></span>
         <span class="med-spacer"></span>
-        <span matTooltip="Add new contact">
+        <span matTooltip="Add new Order">
             <mat-icon color="primary" (click)="toggle('addMode')">add</mat-icon>
         </span>
         <span class="small-spacer"></span>
@@ -360,18 +397,18 @@
     </div>
     <div class="example-container mat-elevation-z8">
         <mat-table [dataSource]="dataSource" matSort>
-            <ng-container matColumnDef="contacttype">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>ContactType</mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.contacttype}} </mat-cell>
+            <ng-container matColumnDef="campaignType">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Order Type</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.campaignType}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="phone">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.phone}} </mat-cell>
+            <ng-container matColumnDef="campaignID">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.campaignID}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="_id">
                 <mat-header-cell *matHeaderCellDef> action </mat-header-cell>

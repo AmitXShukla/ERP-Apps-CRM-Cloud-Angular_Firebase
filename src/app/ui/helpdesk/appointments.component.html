@@ -1,4 +1,4 @@
-<app-header pageTitle="Enquiries" imageUrl="sms" helpType="enquiry"></app-header>
+<app-header pageTitle="Appointment" imageUrl="sms" helpType="enquiry"></app-header>
 <mat-card [@fallIn]='state'>
     <mat-card-content>
         <div *ngIf="(toggleField=='searchMode') 
@@ -47,7 +47,7 @@
             <mat-error *ngIf="error">Error: {{ errorMessage }}</mat-error>
             <mat-card-actions align="start">
                 <button type="submit" mat-raised-button color="primary" [disabled]="!addDataForm.valid">New
-                    Enquiry</button>
+                    Appointment</button>
                 <button type="reset" (click)="this.addDataForm.reset();" mat-raised-button
                     [disabled]="!addDataForm.valid" color="primary">Clear</button>
                 <span class="med-spacer"></span>
@@ -77,6 +77,13 @@
             <mat-form-field class="example-full-width">
                 <mat-label>Leave a comment</mat-label>
                 <textarea matInput placeholder="Ex. Purpose of enquiry..." formControlName="purpose"></textarea>
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+                <input matInput type="date" placeholder="Appointment Date" formControlName="appointmentdt" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Appointment Time" formControlName="appointmenttm" required>
             </mat-form-field>
             <mat-accordion>
                 <mat-expansion-panel>
@@ -209,6 +216,13 @@
                 <mat-label>Leave a comment</mat-label>
                 <textarea matInput placeholder="Ex. Purpose of enquiry..." formControlName="purpose"></textarea>
             </mat-form-field>
+            <br/>
+            <mat-form-field>
+                <input matInput type="date" placeholder="Appointment Date" formControlName="appointmentdt" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Appointment Time" formControlName="appointmenttm" required>
+            </mat-form-field>
             <mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
@@ -329,7 +343,7 @@
                             </mat-icon>
                         </span>
                         <br />
-                        <app-fileupload fileUrl="CALLS" docId="{{docId}}"></app-fileupload>
+                        <app-fileupload fileUrl="APPOINTMENT" docId="{{docId}}"></app-fileupload>
                     </div>
                     <br>
                     <button type="button" mat-raised-button *ngIf="(userRole$ | async)?.addressbook.delete"

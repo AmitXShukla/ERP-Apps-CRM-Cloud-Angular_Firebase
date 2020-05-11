@@ -11,6 +11,11 @@ import { AddressComponent } from './ui/addressbook/address.component';
 import { CampaignComponent } from './ui/market/campaign.component';
 import { LeadComponent } from './ui/market/lead.component';
 import { OpportunityComponent } from './ui/market/opportunity.component';
+import { AppointmentsComponent } from './ui/helpdesk/appointments.component';
+import { TicketsComponent } from './ui/helpdesk/tickets.component';
+import { WorkordersComponent } from './ui/helpdesk/workorders.component';
+import { OrdersComponent } from './ui/orders/orders.component';
+import { CallsComponent } from './ui/callregister/calls.component';
 
 // firebase auth guard]
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
@@ -34,6 +39,11 @@ const routes: Routes = [
   { path: 'campaign', component: CampaignComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'lead', component: LeadComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'opportunity', component: OpportunityComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'appointment', component: AppointmentsComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'ticket', component: TicketsComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'workorder', component: WorkordersComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'order', component: OrdersComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'call', component: CallsComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 

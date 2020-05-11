@@ -24,11 +24,6 @@
           <mat-icon class="circle-link example-icon-link">sms</mat-icon>BPO call center
         </button>
       </div>
-      <!-- <div mat-subheader *ngIf="(data$ | async)?.addressbook.visible">
-        <button mat-menu-item [matMenuTriggerFor]="crmMenu">
-          <mat-icon class="circle-link example-icon-link">cloud</mat-icon>CRM
-        </button>
-      </div> -->
       <div mat-subheader *ngIf="(data$ | async)?.admin.visible">
         <mat-divider></mat-divider>
         <button mat-menu-item routerLink="/admin">
@@ -79,31 +74,31 @@
 <mat-menu #bpoMenu="matMenu">
   <div mat-subheader>
     <mat-divider></mat-divider>
-    <button mat-menu-item routerLink="/campaign">
+    <button mat-menu-item routerLink="/appointment">
       Appointments
     </button>
   </div>
   <div mat-subheader>
     <mat-divider></mat-divider>
-    <button mat-menu-item routerLink="/lead">
+    <button mat-menu-item routerLink="/call">
       Calls, emails, Enquiries
     </button>
   </div>
   <div mat-subheader>
     <mat-divider></mat-divider>
-    <button mat-menu-item routerLink="/opportunity">
+    <button mat-menu-item routerLink="/ticket">
       Helpdesk Service Tickets
     </button>
   </div>
   <div mat-subheader>
     <mat-divider></mat-divider>
-    <button mat-menu-item routerLink="/opportunity">
+    <button mat-menu-item routerLink="/workorder">
       Work Orders
     </button>
   </div>
   <div mat-subheader>
     <mat-divider></mat-divider>
-    <button mat-menu-item routerLink="/opportunity">
+    <button mat-menu-item routerLink="/order">
       Order Fulfilllment
     </button>
   </div>

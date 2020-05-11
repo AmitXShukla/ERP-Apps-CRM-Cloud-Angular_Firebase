@@ -11,13 +11,13 @@ import { BackendService } from '../../services/backend.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-calls',
-  templateUrl: './calls.component.html',
-  styleUrls: ['./calls.component.css'],
+  selector: 'app-appointments',
+  templateUrl: './appointments.component.html',
+  styleUrls: ['./appointments.component.css'],
   animations: [moveIn(), fallIn()],
   host: { '[@moveIn]': '' }
 })
-export class CallsComponent implements OnInit, OnDestroy {
+export class AppointmentsComponent implements OnInit, OnDestroy {
   panelOpenState = false;
   contacts = ['Personal', 'Customer', 'Manufacturer', 'Vendor', 'Other', 'Campaign', 'Lead', 'Oppurtunity'];
   addTypes = ['Home', 'Office', 'Primary', 'Mailing'];
@@ -65,6 +65,8 @@ export class CallsComponent implements OnInit, OnDestroy {
       phone: ['', [Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
       contacttype: ['', [Validators.required]],
       purpose: ['',Validators.required],
+      appointmentdt: ['',Validators.required],
+      appointmenttm: ['',Validators.required],
       addresses: this._fb.array([]),
       emails: this._fb.array([]),
       phones: this._fb.array([])
@@ -75,6 +77,8 @@ export class CallsComponent implements OnInit, OnDestroy {
       phone: ['', [Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
       contacttype: ['', [Validators.required]],
       purpose: ['',Validators.required],
+      appointmentdt: ['',Validators.required],
+      appointmenttm: ['',Validators.required],
       addresses: this._fb.array([]),
       emails: this._fb.array([]),
       phones: this._fb.array([])
@@ -134,7 +138,7 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   getData(formData?) {
     this.dataLoading = true;
-    this.querySubscription = this._backendService.getDocs('CALLS', formData).subscribe((res) => {
+    this.querySubscription = this._backendService.getDocs('APPOINTMENTS', formData).subscribe((res) => {
       if (res.length > 0) {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
@@ -153,7 +157,7 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   setData(formData) {
     this.dataLoading = true;
-    return this._backendService.setDoc('CALLS', formData, this.authState.uid).then(res => {
+    return this._backendService.setDoc('APPOINTMENTS', formData, this.authState.uid).then(res => {
       if (res) {
         this.savedChanges = true;
         this.error = false;
@@ -173,7 +177,7 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   updateData(formData) {
     this.dataLoading = true;
-    this.querySubscription = this._backendService.updateDoc('CALLS', formData._id, formData).then(res => {
+    this.querySubscription = this._backendService.updateDoc('APPOINTMENTS', formData._id, formData).then(res => {
       if (res) {
         this.savedChanges = true;
         this.error = false;
@@ -193,7 +197,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   getDoc(docId) {
     this.docId = docId; // this is required to pass at file upload directive
     this.dataLoading = true;
-    this.data$ = this._backendService.getDoc('CALLS', docId).subscribe(res => {
+    this.data$ = this._backendService.getDoc('APPOINTMENTS', docId).subscribe(res => {
       if (res) {
         this.data$ = res;
         this.editDataForm = this._fb.group({
@@ -202,6 +206,8 @@ export class CallsComponent implements OnInit, OnDestroy {
           phone: ['', [Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
           contacttype: ['', [Validators.required]],
           purpose: ['',Validators.required],
+          appointmentdt: ['',Validators.required],
+          appointmenttm: ['',Validators.required],
           addresses: this._fb.array([]),
           emails: this._fb.array([]),
           phones: this._fb.array([])
@@ -233,7 +239,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   deleteDoc(docId) {
     if (confirm("Are you sure want to delete this record ?")) {
       this.dataLoading = true;
-      this._backendService.deleteDoc('CALLS', docId).then(res => {
+      this._backendService.deleteDoc('APPOINTMENTS', docId).then(res => {
         if (res) {
           this.error = false;
           this.errorMessage = "";
