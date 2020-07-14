@@ -1,4 +1,7 @@
-# Please give a <b>Star *</b> to this repository if you like this project.
+```diff
++ if you like this project, Please consider,
+- following me on GitHub & a generous STAR * to this repository.
+```
 # ERP-Apps
 # Objective
 Build ERP apps for Small, Medium and Large Organizations<br/>
