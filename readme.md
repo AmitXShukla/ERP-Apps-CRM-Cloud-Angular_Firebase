@@ -9,7 +9,7 @@
 # ERP-Apps
 # Objective
 Build ERP apps for Small, Medium and Large Organizations<br/>
-Re-Write / Build new CRM GUI for existing ERP<br/>
+Re-Write / Build new CRM GUI App for existing ERP<br/>
 Convert Old Software to new App/UI (Desktop & Mobile) without changing database<br/>
 Migrate existing ERP to new platform<br/>
 Make an App for existing Oracle, PeopleSoft, SAP, or Siebel CRM or old custom software based ERP<br/>

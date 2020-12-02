@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
+// import { auth } from 'firebase/app';
+import auth from 'firebase';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { firestore } from 'firebase/app';
+// import { firestore } from 'firebase/app';
+import firestore from 'firebase';
 import { Subject }    from 'rxjs';
 
 @Injectable({
@@ -30,7 +32,7 @@ return this.afAuth.signInWithEmailAndPassword(formData.data.email, formData.data
   }
 
   loginSocialAuth(formType) {
-    return formType=='FB' ? this.afAuth.signInWithRedirect(new auth.FacebookAuthProvider()) : this.afAuth.signInWithRedirect(new auth.GoogleAuthProvider());
+    return formType=='FB' ? this.afAuth.signInWithRedirect(new auth.auth.FacebookAuthProvider()) : this.afAuth.signInWithRedirect(new auth.auth.GoogleAuthProvider());
   }
   
   createUser(formData) {
@@ -120,7 +122,7 @@ return this.afAuth.signInWithEmailAndPassword(formData.data.email, formData.data
     const timestamp = this.timestamp;
     const docRef = this._afs.collection(this.getCollUrls(coll)).doc(docId);
     return docRef.update({
-      files: firestore.FieldValue.arrayUnion(filePath),
+      files: firestore.firestore.FieldValue.arrayUnion(filePath),
       updatedAt: timestamp,
       // username: this.afAuth.auth.currentUser.displayName,
       // useremail: this.afAuth.auth.currentUser.email,

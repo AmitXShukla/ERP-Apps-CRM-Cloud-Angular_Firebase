@@ -5,7 +5,8 @@ import { environment } from '../../../environments/environment';
 import { BackendService } from '../../services/backend.service';
 import { DBInBoundData, DBOutBoundData } from '../../services/datamodel';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
+// import { auth } from 'firebase/app';
+import auth from 'firebase';
 
 @Component({
   selector: 'app-signup',
